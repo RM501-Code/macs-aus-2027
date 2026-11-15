@@ -100,7 +100,7 @@ const TRIP = {
 
     // ================= ROAD TRIP =================
     { id: "car-pickup", type: "car", who: ALL, status: "tobook",
-      title: "Hire car pick-up – Brisbane Airport", date: "2027-02-25", time: "18:00", tz: "+10:00", place: "Brisbane Airport",
+      title: "Hire car pick-up – Brisbane Airport", date: "2027-02-25", tz: "+10:00", place: "Brisbane Airport",
       notes: "Pick up on arrival from Hamilton (time TBC). One-way to Sydney, drop off 3 Mar. Ryan driving – room for 4 + luggage.",
       lookup: [["One-way QLD → NSW drop-off fee (can be big)", "compare on rental sites"], ["Parking at Oaks on Margaret (city centre)", "hotel website"]] },
     { id: "d1", type: "drive", who: ALL, status: "idea",
