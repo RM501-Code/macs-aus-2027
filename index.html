@@ -88,15 +88,15 @@ const TRIP = {
   people: { mum: "Mum", dad: "Dad", ryan: "Ryan", bobbi: "Bobbi" },
   items: [
     // ================= MUM & DAD: SINGAPORE =================
-    { id: "p-uk-sg", type: "flight", who: P, status: "details",
+    { id: "p-uk-sg", held: "Dad's phone", type: "flight", who: P, status: "details",
       title: "London → Singapore", date: "2027-02-08", tz: "+00:00",
-      notes: "Booked. Need flight number, times and whose phone it's on." },
-    { id: "p-sg-stay", type: "stay", who: P, status: "booked",
+      notes: "Booked. Need flight number + times." },
+    { id: "p-sg-stay", held: "Dad's phone", paid: true, type: "stay", who: P, status: "booked",
       title: "PARKROYAL COLLECTION Marina Bay", date: "2027-02-09", endDate: "2027-02-13", tz: "+08:00",
       place: "PARKROYAL COLLECTION Marina Bay Singapore" },
-    { id: "p-sg-syd", type: "flight", who: P, status: "details",
+    { id: "p-sg-syd", held: "Dad's phone", type: "flight", who: P, status: "details",
       title: "Singapore → Sydney", date: "2027-02-14", tz: "+11:00",
-      notes: "Lands Sun 14 Feb. Is this booked? Need flight number + times." },
+      notes: "Booked. Lands Sun 14 Feb – need flight number + times." },
 
     // ================= SYDNEY (Bobbi joins) =================
     { id: "syd-1", type: "stay", who: PB, status: "tobook",
@@ -107,7 +107,7 @@ const TRIP = {
       notes: "Queensland is 1 hour behind Sydney (no daylight saving)." },
 
     // ================= CAIRNS =================
-    { id: "cns-stay", type: "stay", who: PB, status: "booked",
+    { id: "cns-stay", held: "Dad's phone", paid: true, type: "stay", who: PB, status: "booked",
       title: "Cairns Aquarius", date: "2027-02-18", endDate: "2027-02-21", tz: "+10:00",
       place: "Cairns Aquarius" },
     { id: "cns-reef", type: "activity", who: PB, status: "tobook",
@@ -125,7 +125,7 @@ const TRIP = {
       depPlace: "Cairns", depTime: "09:55", depTz: "+10:00", arrPlace: "Proserpine", arrDate: "2027-02-21", arrTime: "11:20", arrTz: "+10:00",
       notes: "Times are a guess (~09:55 → 11:20). Then taxi to Airlie Beach (~35 min).",
       lookup: [["Confirm flight days + times", "skytrans.com.au"]] },
-    { id: "airlie-stay", type: "stay", who: PB, status: "booked",
+    { id: "airlie-stay", amend: "2027-02-11", type: "stay", who: PB, status: "booked",
       title: "Airlie Beach Hotel", date: "2027-02-21", endDate: "2027-02-22", tz: "+10:00",
       place: "Airlie Beach Hotel" },
 
@@ -140,7 +140,7 @@ const TRIP = {
       depPlace: "Beijing", depTime: "01:40", depTz: "+08:00",
       arrPlace: "Sydney", arrDate: "2027-02-21", arrTime: "15:50", arrTz: "+11:00",
       place: "Sydney Airport", held: "Booking.com – Ryan's phone" },
-    { id: "r-syd-night", type: "stay", who: ["ryan"], status: "booked",
+    { id: "r-syd-night", held: "Ryan's phone", paid: true, type: "stay", who: ["ryan"], status: "booked",
       title: "Ibis Sydney Airport", date: "2027-02-21", endDate: "2027-02-22", tz: "+11:00",
       place: "Ibis Sydney Airport" },
 
@@ -149,10 +149,10 @@ const TRIP = {
       title: "Ferry: Port of Airlie → Hamilton Island", date: "2027-02-22", time: "09:00", tz: "+10:00",
       place: "Port of Airlie", notes: "Morning ferry, ~9–9:30am.",
       lookup: [["Ferry times + tickets", "Cruise Whitsundays website"]] },
-    { id: "r-syd-ham", type: "flight", who: ["ryan"], status: "details",
+    { id: "r-syd-ham", held: "Ryan's phone", type: "flight", who: ["ryan"], status: "details",
       title: "Sydney → Hamilton Island", date: "2027-02-22", tz: "+10:00",
       place: "Hamilton Island Airport", notes: "Booked. Need flight number + landing time." },
-    { id: "ham-stay", type: "stay", who: ALL, status: "booked",
+    { id: "ham-stay", held: "Ryan's phone", pay: "2027-01-20", cancel: "2027-01-22", type: "stay", who: ALL, status: "booked",
       title: "Frangipani Apartments", date: "2027-02-22", endDate: "2027-02-25", tz: "+10:00",
       place: "Frangipani Hamilton Island", notes: "🎉 Everyone together from here." },
     { id: "ham-hop", type: "activity", who: ALL, status: "idea",
@@ -165,7 +165,7 @@ const TRIP = {
     // ================= BRISBANE =================
     { id: "ham-bne", type: "flight", who: ALL, status: "tobook",
       title: "Hamilton Island → Brisbane", date: "2027-02-25", tz: "+10:00" },
-    { id: "bne-stay", type: "stay", who: ALL, status: "booked",
+    { id: "bne-stay", held: "Ryan's phone", payNote: "Pay on arrival", cancel: "2027-02-23", type: "stay", who: ALL, status: "booked",
       title: "Oaks Brisbane on Margaret Suites", date: "2027-02-25", endDate: "2027-02-27", tz: "+10:00",
       place: "Oaks Brisbane on Margaret Suites" },
     { id: "bne-zoo", type: "activity", who: ALL, status: "tobook",
@@ -182,7 +182,7 @@ const TRIP = {
       title: "Brisbane → Byron Bay", date: "2027-02-27", tz: "+11:00",
       hrs: "~2h", stops: ["Gold Coast – lunch"],
       notes: "⏰ Clocks jump forward 1 hour at the NSW border." },
-    { id: "byron-stay", type: "stay", who: ALL, status: "booked",
+    { id: "byron-stay", held: "Ryan's phone", pay: "2027-02-19", cancel: "2027-02-22", type: "stay", who: ALL, status: "booked",
       title: "Byron Quarter Apartments", date: "2027-02-27", endDate: "2027-03-01", tz: "+11:00",
       place: "Byron Quarter Apartments Byron Bay" },
     { id: "byron-day", type: "activity", who: ALL, status: "idea",
@@ -190,7 +190,7 @@ const TRIP = {
     { id: "d2", type: "drive", who: ALL, status: "idea",
       title: "Byron Bay → Port Macquarie", date: "2027-03-01", tz: "+11:00",
       hrs: "~5h", stops: ["Coffs Harbour or Yamba – lunch"] },
-    { id: "pm-stay", type: "stay", who: ALL, status: "booked",
+    { id: "pm-stay", held: "Ryan's phone", payNote: "Pay on arrival", cancel: "2027-02-28", type: "stay", who: ALL, status: "booked",
       title: "Rydges Port Macquarie", date: "2027-03-01", endDate: "2027-03-02", tz: "+11:00",
       place: "Rydges Port Macquarie" },
     { id: "pm-koala", type: "activity", who: ALL, status: "idea",
@@ -199,7 +199,7 @@ const TRIP = {
     { id: "d3", type: "drive", who: ALL, status: "idea",
       title: "Port Macquarie → Blue Mountains", date: "2027-03-02", time: "09:30", tz: "+11:00",
       hrs: "~5h30–6h", stops: ["Newcastle – lunch", "Three Sisters at sunset"] },
-    { id: "bm-stay", type: "stay", who: ALL, status: "booked",
+    { id: "bm-stay", held: "Ryan's phone", pay: "2027-02-22", cancel: "2027-02-25", type: "stay", who: ALL, status: "booked",
       title: "Montblu at Echo Point", date: "2027-03-02", endDate: "2027-03-03", tz: "+11:00",
       place: "Montblu Echo Point Katoomba" },
     { id: "bm-scenic", type: "activity", who: ALL, status: "idea",
@@ -240,7 +240,7 @@ const TRIP = {
   ]
 };
 
-const COSTS_BLOB = {"salt":"4Dbi7vFnNIwGadB2HHfu9A==","iv":"Y5kIoRuO2CG5sIgw","iter":150000,"data":"/nYpzAii8bWmZqv1sCr1W1EhJht8ccPoybqclR2OCDxFX1N8MUT6dR9OfWLoanKdCN8aCLMAF/IbocrwZltV6R7aFtfV75NbUGuAZkMklh7oEoQffy8G62Gv7FjEFlj50wn2BCC/3jGtbsqRZcWKfVs7YeNvzc3Lm4AUh326h6FCy65J8EwWAqEC3DZn5Hbl0BTgAXEaSC792+NWw4CFibQfjEirwzH5y+ibGMicocozhuPdc2VVkxrduTOG7uDl9O8nCZpahAwNrQrFoRowdsFcGvYCyP10X3P8/XcaYDDj80VC5+vJjehuyOVsHKFp00Hwl7FkaxVC5D+UVkf52cb4sXhZBIjIurzTQpaayf2UqfBIS+oZucFgZe6CoPkzfbsHZjre10152OLAPZvoBk0gHXWv6+KY1nhOLizpPDIuPfh4LrLdZXvYu4cmJQWwodemaxQ3IxmOMUZ9bcWeNqSFNkUuPw2AADCqs7to/t+ug6/nerccDwuSKCNs1RMFAuSmiuY25+OvScWG7Pig+XS5G1W0dMz3kMGhdCfPZhiuYeBNJopDDCCFKcFNo59JL1n8i5gflUjNUiohEmy7FysiiCOZg4aIGi4mWVxuZmx+3Mtcc/FWmbuL59rDZaqQ29WdktkjA92Lv7PMFVGEd8uuHXTCYgrckTtwTEqdZUlG5lfY5Z4P/XoZS/7WWsK3vqxTyVwjq6xKABbr8naiadbjhWefaXWKDsJt4F1J9Uik664EyN7f2jwpsNfYe2W/gzQJPqp5QFyQ7ParBfzhI2HCwui24lR//nuqD6P1x4qQZS3nT1sWH2gGci5Ydk4fJa5ZIZhu7zqcJgkVGHqz0dN4mmDYCXODyxj2wVhwCjaAwr79z/pgYDY1OL8YSVjTNpgaffJNz0IX5tVnAHiq3H+aWI79c8v2bs5Sove8rz47I6DaXVBQQqjTXR1o3LMTR16+KmddxmyUFAZvyxrgbaIHoOyfcFJMs6+8JVwUOQazkxK9b6cZ3FgYNAjdGcNAXpDn+E3tTslMQcxI3+OUtzuvAmfa81oNB23XeUvHz/JWpbBs+c+igU5L+1KWNBtzF3AIE2oujPb+oy6CGMv/2jCgjl50hWrexkkQfzIwKxdGFx1i1uGAhL7slVASNLZgCe1uVJdAQpsBW//OWhFROO6j79eygqtizP5Bbsgf0p6OTYb6O3ByKerBpTom3DyY"};
+const COSTS_BLOB = {"salt":"6LBzBlRxfa9oPdJvKUHDmg==","iv":"CWrKhSMHFGxaZtbS","iter":150000,"data":"FPeXF1h9d2YKRNMJt1M1sTV38khk13n1YGu1JhB/g5cLHX0SMufOS8eoJxonRpHi2o8BXzdEFQ7j1q4SoAffvq3PRst/VgxOXAYdHTm1s+GLzwMtQR3gIWk3yx+zJg7EEL2umjgAO6jEYaITlShDpNE095MlYJ3D+RF8yCGp+ps5PLGhXn0kU3bdDgK2OzdtPvmqO3HQdEZJgyRcvIeLfhmeUBqOyOUIy1bxcty2P26GedNlAB+coE1W0zK3W77vQaunsJlKPpE3ShxpKy1PO/Zz4Hy15om4bA7wnChGugb9fscpuOqtvYcsWHCWewinj49kwT6BQmrtnVy4ki/3CwS1+L+J/teZwawFZAt5DSKk7IurcM7O0LG84OVa9ZuriF7qrdJY9aC6bmATwZpsEVnIP1Mrx3W2+bEuydqjxvz3O798KqOR+r7ZWVQvNDzRH3ZMaiLifGlyV73UKv/gACf/ANPtjGQvQdfjemvypdIG5ScuzUx0u63pYf7sZKInCI7fH3kkiM7lvrlqjJmc4nONlJtptRbQktZEYKP6Be4ez3CQfb6e4K+IFrN3dMrAmEtq1dYdWs+Zvfwlvvu29iX++szrZzm4GzJGTvmRUe6JXD66aTg00JosWlcGugtwdKRpdwC8CiqMAuTTkZXuJZqCm5LQHq+UmCkhpMp9P1jJqz1hVIqUz1T2BiH/oaHRVslLR3ZqJIYx590t2482cD8L3uBwcP4kjZAWe3eiITIL4a1yB4LqZ+KYuh4EVd/K3bOM8FJluc9Ubj+J9xdXHvXGidc+pNYEr2Tm68fVItWgpCJ1tZJJytvZNV2ISkNM+A97fn5Tlt0zd1EnwCpb9ie+7yy0YgUdCxbG9qNkD5l2DqBaZ7xFt0xN/NOjkGxIEAS3/QCilfhUQyhVS5TSKyNeSlKQk5YX028zvfmWIi9MxNVMsmLiydPYml2YjutFcyX+z1DGHjsK+Odoh9CJWrbShswKYMcMY1LrHybGkJmxReF3bpArU2wAO3h+35nCuFaM9OM51Xd12M2jpE7xuyTI5lghR0p/Cnd5HyXf05ECLc5Q7BDd1jNxdoBYIBC9bJoTnmA/Al4tj/cebE5mZVVP+8Lg2XD6DQuC9SlQtL9XLVjdMVSME5DQXQ8fcW1bCWPBbB0SjVnrddq2CNGCEwW2pEv5CwydjN522IwbE1JDTE7bDyS3Wo0rqHSPT2OrSSxihStlB/q7PvSw++On03FxQHej1CUXtI9O36ypxBhVuXeXhM2Lt7JxZ1v1nUZcOA=="};
 </script>
 <script>
 const ICON = {flight:"✈️",stay:"🛏️",drive:"🚗",car:"🔑",activity:"🎟️",ferry:"⛴️"};
@@ -307,9 +307,10 @@ function card(i){
   const dir = i.type==="drive" ? `<a class="btn" target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(i.title.split(" → ")[0]+", Australia")}&destination=${encodeURIComponent(i.title.split(" → ").pop()+", Australia")}&travelmode=driving">🧭 Route</a>` : "";
   const cal = `<a class="btn" href="${calLink(i)}" download="${i.id}.ics">📅 Add to Calendar</a>`;
   const ppl = i.who.map(w => TRIP.people[w]).join(", ");
-  const dl = [i.pay && `💷 Pay by <b>${fmtDay(i.pay)}</b>`, i.cancel && `↩️ Free cancel until <b>${fmtDay(i.cancel)}</b>`].filter(Boolean).join("<br>");
+  const dl = [i.paid && `💷 <b>Paid</b>`, i.payNote && `💷 ${esc(i.payNote)}`, i.pay && `💷 Pay by <b>${fmtDay(i.pay)}</b>`, i.cancel && `↩️ Free cancel until <b>${fmtDay(i.cancel)}</b>`, i.amend && `✏️ Free changes until <b>${fmtDay(i.amend)}</b>`].filter(Boolean).join("<br>");
   const dlCal = [i.pay && `<a class="btn" href="${ics("💷 Pay: "+i.title,{allDay:true,start:i.pay,end:addDay(i.pay)})}" download="pay-${i.id}.ics">📅 Pay date</a>`,
-                 i.cancel && `<a class="btn" href="${ics("↩️ Last day to cancel: "+i.title,{allDay:true,start:i.cancel,end:addDay(i.cancel)})}" download="cancel-${i.id}.ics">📅 Cancel date</a>`].filter(Boolean).join("");
+                 i.cancel && `<a class="btn" href="${ics("↩️ Last day to cancel: "+i.title,{allDay:true,start:i.cancel,end:addDay(i.cancel)})}" download="cancel-${i.id}.ics">📅 Cancel date</a>`,
+                 i.amend && `<a class="btn" href="${ics("✏️ Last day for free changes: "+i.title,{allDay:true,start:i.amend,end:addDay(i.amend)})}" download="amend-${i.id}.ics">📅 Change date</a>`].filter(Boolean).join("");
   return `<div class="card item-wrap" onclick="this.classList.toggle('open')">
     <div class="item">
       <div class="ic ${i.type}">${ICON[i.type]}</div>
@@ -355,7 +356,7 @@ function today(){
   }
   // deadlines
   const dls = [];
-  list.forEach(i => { if(i.pay) dls.push([i.pay,"💷 Pay",i]); if(i.cancel) dls.push([i.cancel,"↩️ Free cancel ends",i]); });
+  list.forEach(i => { if(i.pay) dls.push([i.pay,"💷 Pay",i]); if(i.cancel) dls.push([i.cancel,"↩️ Free cancel ends",i]); if(i.amend) dls.push([i.amend,"✏️ Free changes end",i]); });
   const tdISO = now.toISOString().slice(0,10);
   const up = dls.filter(d => d[0] >= tdISO).sort((a,b)=>a[0].localeCompare(b[0])).slice(0,4);
   h += `<h2>⏰ Deadlines</h2>` + (up.length ? up.map(([d,l,i]) => { const n = Math.ceil((new Date(d)-now)/864e5);

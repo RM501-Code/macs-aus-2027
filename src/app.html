@@ -141,9 +141,10 @@ function card(i){
   const dir = i.type==="drive" ? `<a class="btn" target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(i.title.split(" → ")[0]+", Australia")}&destination=${encodeURIComponent(i.title.split(" → ").pop()+", Australia")}&travelmode=driving">🧭 Route</a>` : "";
   const cal = `<a class="btn" href="${calLink(i)}" download="${i.id}.ics">📅 Add to Calendar</a>`;
   const ppl = i.who.map(w => TRIP.people[w]).join(", ");
-  const dl = [i.pay && `💷 Pay by <b>${fmtDay(i.pay)}</b>`, i.cancel && `↩️ Free cancel until <b>${fmtDay(i.cancel)}</b>`].filter(Boolean).join("<br>");
+  const dl = [i.paid && `💷 <b>Paid</b>`, i.payNote && `💷 ${esc(i.payNote)}`, i.pay && `💷 Pay by <b>${fmtDay(i.pay)}</b>`, i.cancel && `↩️ Free cancel until <b>${fmtDay(i.cancel)}</b>`, i.amend && `✏️ Free changes until <b>${fmtDay(i.amend)}</b>`].filter(Boolean).join("<br>");
   const dlCal = [i.pay && `<a class="btn" href="${ics("💷 Pay: "+i.title,{allDay:true,start:i.pay,end:addDay(i.pay)})}" download="pay-${i.id}.ics">📅 Pay date</a>`,
-                 i.cancel && `<a class="btn" href="${ics("↩️ Last day to cancel: "+i.title,{allDay:true,start:i.cancel,end:addDay(i.cancel)})}" download="cancel-${i.id}.ics">📅 Cancel date</a>`].filter(Boolean).join("");
+                 i.cancel && `<a class="btn" href="${ics("↩️ Last day to cancel: "+i.title,{allDay:true,start:i.cancel,end:addDay(i.cancel)})}" download="cancel-${i.id}.ics">📅 Cancel date</a>`,
+                 i.amend && `<a class="btn" href="${ics("✏️ Last day for free changes: "+i.title,{allDay:true,start:i.amend,end:addDay(i.amend)})}" download="amend-${i.id}.ics">📅 Change date</a>`].filter(Boolean).join("");
   return `<div class="card item-wrap" onclick="this.classList.toggle('open')">
     <div class="item">
       <div class="ic ${i.type}">${ICON[i.type]}</div>
@@ -189,7 +190,7 @@ function today(){
   }
   // deadlines
   const dls = [];
-  list.forEach(i => { if(i.pay) dls.push([i.pay,"💷 Pay",i]); if(i.cancel) dls.push([i.cancel,"↩️ Free cancel ends",i]); });
+  list.forEach(i => { if(i.pay) dls.push([i.pay,"💷 Pay",i]); if(i.cancel) dls.push([i.cancel,"↩️ Free cancel ends",i]); if(i.amend) dls.push([i.amend,"✏️ Free changes end",i]); });
   const tdISO = now.toISOString().slice(0,10);
   const up = dls.filter(d => d[0] >= tdISO).sort((a,b)=>a[0].localeCompare(b[0])).slice(0,4);
   h += `<h2>⏰ Deadlines</h2>` + (up.length ? up.map(([d,l,i]) => { const n = Math.ceil((new Date(d)-now)/864e5);
