@@ -66,8 +66,8 @@ const TRIP = {
       arrPlace: "Sydney", arrDate: "2027-02-21", arrTime: "15:50", arrTz: "+11:00",
       place: "Sydney Airport", held: "Booking.com – Ryan's phone" },
     { id: "r-syd-night", type: "stay", who: ["ryan"], status: "booked",
-      title: "Sydney airport hotel", date: "2027-02-21", endDate: "2027-02-22", tz: "+11:00",
-      place: "Sydney Airport", notes: "Which hotel? Tell Ryan to add the name." },
+      title: "Ibis Sydney Airport", date: "2027-02-21", endDate: "2027-02-22", tz: "+11:00",
+      place: "Ibis Sydney Airport" },
 
     // ================= HAMILTON ISLAND – everyone together =================
     { id: "ham-ferry", type: "ferry", who: PB, status: "tobook",
@@ -142,12 +142,16 @@ const TRIP = {
       place: "Sydney NSW", notes: "Same hotel as Mum & Dad?" },
     { id: "syd-end-p", type: "stay", who: PB, status: "tobook",
       title: "Sydney hotel", date: "2027-03-03", endDate: "2027-03-08", tz: "+11:00",
-      place: "Sydney NSW", notes: "When does Bobbi head off?" },
+      place: "Sydney NSW" },
     { id: "r-home", type: "flight", who: ["ryan"], status: "booked",
       title: "Sydney → Shanghai → Gatwick · China Eastern", date: "2027-03-06", tz: "+11:00",
       depPlace: "Sydney", depTime: "21:30", depTz: "+11:00",
       arrPlace: "Gatwick", arrDate: "2027-03-07", arrTime: "14:00", arrTz: "+00:00",
       place: "Sydney Airport", held: "Ryan's phone" },
+
+    { id: "b-leaves", type: "flight", who: ["bobbi"], status: "details", approx: true,
+      title: "Bobbi heads off", date: "2027-03-14", tz: "+11:00",
+      notes: "Assumed 14 March – confirm date + details." },
 
     // ================= MUM & DAD: HOME VIA SENTOSA =================
     { id: "p-syd-sg", type: "flight", who: P, status: "details",

@@ -141,8 +141,8 @@ const TRIP = {
       arrPlace: "Sydney", arrDate: "2027-02-21", arrTime: "15:50", arrTz: "+11:00",
       place: "Sydney Airport", held: "Booking.com – Ryan's phone" },
     { id: "r-syd-night", type: "stay", who: ["ryan"], status: "booked",
-      title: "Sydney airport hotel", date: "2027-02-21", endDate: "2027-02-22", tz: "+11:00",
-      place: "Sydney Airport", notes: "Which hotel? Tell Ryan to add the name." },
+      title: "Ibis Sydney Airport", date: "2027-02-21", endDate: "2027-02-22", tz: "+11:00",
+      place: "Ibis Sydney Airport" },
 
     // ================= HAMILTON ISLAND – everyone together =================
     { id: "ham-ferry", type: "ferry", who: PB, status: "tobook",
@@ -217,12 +217,16 @@ const TRIP = {
       place: "Sydney NSW", notes: "Same hotel as Mum & Dad?" },
     { id: "syd-end-p", type: "stay", who: PB, status: "tobook",
       title: "Sydney hotel", date: "2027-03-03", endDate: "2027-03-08", tz: "+11:00",
-      place: "Sydney NSW", notes: "When does Bobbi head off?" },
+      place: "Sydney NSW" },
     { id: "r-home", type: "flight", who: ["ryan"], status: "booked",
       title: "Sydney → Shanghai → Gatwick · China Eastern", date: "2027-03-06", tz: "+11:00",
       depPlace: "Sydney", depTime: "21:30", depTz: "+11:00",
       arrPlace: "Gatwick", arrDate: "2027-03-07", arrTime: "14:00", arrTz: "+00:00",
       place: "Sydney Airport", held: "Ryan's phone" },
+
+    { id: "b-leaves", type: "flight", who: ["bobbi"], status: "details", approx: true,
+      title: "Bobbi heads off", date: "2027-03-14", tz: "+11:00",
+      notes: "Assumed 14 March – confirm date + details." },
 
     // ================= MUM & DAD: HOME VIA SENTOSA =================
     { id: "p-syd-sg", type: "flight", who: P, status: "details",
@@ -236,7 +240,7 @@ const TRIP = {
   ]
 };
 
-const COSTS_BLOB = {"salt":"6+KqKqysO9fsqaBh4Xdmgw==","iv":"d5kjnPzT1QbJyoqP","iter":150000,"data":"5DE0Dmqh5+PlUxdVn4lQji04wTBMYr9JlzzkAazK5eh6+y/pUjBigxgX/EqDn24IYkvNS8s0l3Yq6q3YGfA1YjwDQ8MrOULeaJldKTj9NufPNKfQxizxRJGPUxj4gFf8voXXTLCWj7LlreGd+LzJUNFbztIkvRSBe58yXEMcb6evqToJ/yrcscQefyQodp4JJJ4+XXPPhjxcy1kkY2+/xKrap0xUdb+APzCeXq8Xfp0gbp02xqO6FP0DF48lVK4NEFGqupNrW3ZxwN0k0LrygRi+KxOuqLjy/+XDVs5fjZIuHhoXN4BtnXMyP8LYkYt9Q+g3RUHsEIemmpP4+NUNHKj8QIVon8yo916nCFNwObJ4MyUhqpm6mCkLBwYNnZX7FRq19Ds0W+lC9sQnjL7EyliuFq1StlIh8xdlTsTIRUCWj0HqrX4zTlfciH5OMFN3eIOVir7AK823iB9M2SLjotTpPwHXjYAPGSPdLq62dDftrjGTi8nUpUHaFY2dPJsdfWqIdDZXdCEgC3oTf42YB8/KLN6AnMod0+XVILTRfhl1qo1aZK8k+USWeCX1WunT/jqd132pbjKqvIPZTEl7cJRqbAp/M7sQXWl9RjyiAvDsGmOvYVbyCaGnJ8Nd+WqdK6+mXMHvcN4FjRwlKkLgA1MdQsqPxk0U02wn0U8CAYSWj79Mi61U5SZjcWC0hZIO/SSghJiaC9xqx6HgI/bJe4nwavb+eTb2qoD6Yti7DoaMivDlfEhvuAJUgPSDsoqr9/GMFv3SaYCuAAuUV69OpubkhAUwH5tn5pwrwhTKqKyzlWxNg/LAxAw4APEjFIJU4Yj2w9rIGHsY/0fhB9ysA94jYag9aWyx7vbqpi32fEqUB/n2+c1JWt4w1jyQOeWrMUWV4opkFCyaEOKndSe7SIkxl64F9PWSPuhODgaPxf/nHf1auYvSegoC0Myn2m2GJy8THvjj/yYUNiulm/J5FwVSLvhQ5er0/XA1BGV46xzzcUHSzeU7LD5q60ZmYx4TiFs2B3imwwY1ZRtIt+2agK/BzR2bcLaWtn+oW60lDqWPv8OStV6VI6chSW0ZhG1od9dCg7UAgATcy/hEMI8viI1CZZdnJJOgMqnsOQd/KOmFcDfh+cfeDoNkctZZe8BH5Z4lhwcUhehHk4Ni+XYkIbSNHU8VS9idzYwLIFx0KiJq0I8U15fHBwKpy6sBzeMsWQ=="};
+const COSTS_BLOB = {"salt":"4Dbi7vFnNIwGadB2HHfu9A==","iv":"Y5kIoRuO2CG5sIgw","iter":150000,"data":"/nYpzAii8bWmZqv1sCr1W1EhJht8ccPoybqclR2OCDxFX1N8MUT6dR9OfWLoanKdCN8aCLMAF/IbocrwZltV6R7aFtfV75NbUGuAZkMklh7oEoQffy8G62Gv7FjEFlj50wn2BCC/3jGtbsqRZcWKfVs7YeNvzc3Lm4AUh326h6FCy65J8EwWAqEC3DZn5Hbl0BTgAXEaSC792+NWw4CFibQfjEirwzH5y+ibGMicocozhuPdc2VVkxrduTOG7uDl9O8nCZpahAwNrQrFoRowdsFcGvYCyP10X3P8/XcaYDDj80VC5+vJjehuyOVsHKFp00Hwl7FkaxVC5D+UVkf52cb4sXhZBIjIurzTQpaayf2UqfBIS+oZucFgZe6CoPkzfbsHZjre10152OLAPZvoBk0gHXWv6+KY1nhOLizpPDIuPfh4LrLdZXvYu4cmJQWwodemaxQ3IxmOMUZ9bcWeNqSFNkUuPw2AADCqs7to/t+ug6/nerccDwuSKCNs1RMFAuSmiuY25+OvScWG7Pig+XS5G1W0dMz3kMGhdCfPZhiuYeBNJopDDCCFKcFNo59JL1n8i5gflUjNUiohEmy7FysiiCOZg4aIGi4mWVxuZmx+3Mtcc/FWmbuL59rDZaqQ29WdktkjA92Lv7PMFVGEd8uuHXTCYgrckTtwTEqdZUlG5lfY5Z4P/XoZS/7WWsK3vqxTyVwjq6xKABbr8naiadbjhWefaXWKDsJt4F1J9Uik664EyN7f2jwpsNfYe2W/gzQJPqp5QFyQ7ParBfzhI2HCwui24lR//nuqD6P1x4qQZS3nT1sWH2gGci5Ydk4fJa5ZIZhu7zqcJgkVGHqz0dN4mmDYCXODyxj2wVhwCjaAwr79z/pgYDY1OL8YSVjTNpgaffJNz0IX5tVnAHiq3H+aWI79c8v2bs5Sove8rz47I6DaXVBQQqjTXR1o3LMTR16+KmddxmyUFAZvyxrgbaIHoOyfcFJMs6+8JVwUOQazkxK9b6cZ3FgYNAjdGcNAXpDn+E3tTslMQcxI3+OUtzuvAmfa81oNB23XeUvHz/JWpbBs+c+igU5L+1KWNBtzF3AIE2oujPb+oy6CGMv/2jCgjl50hWrexkkQfzIwKxdGFx1i1uGAhL7slVASNLZgCe1uVJdAQpsBW//OWhFROO6j79eygqtizP5Bbsgf0p6OTYb6O3ByKerBpTom3DyY"};
 </script>
 <script>
 const ICON = {flight:"✈️",stay:"🛏️",drive:"🚗",car:"🔑",activity:"🎟️",ferry:"⛴️"};
