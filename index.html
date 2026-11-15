@@ -91,7 +91,7 @@ const TRIP = {
     { id: "p-uk-sg", held: "Dad's Phone (Trailfinders)", type: "flight", who: P, status: "booked",
       title: "London → Singapore · Flight ?", date: "2027-02-08", tz: "+00:00",
       notes: "Flight number + times to add." },
-    { id: "p-sg-stay", held: "Dad's Phone (Booking.com)", paid: true, type: "stay", who: P, status: "booked",
+    { id: "p-sg-stay", held: "Dad's Phone (Trailfinders)", paid: true, type: "stay", who: P, status: "booked",
       title: "PARKROYAL COLLECTION Marina Bay", date: "2027-02-09", endDate: "2027-02-13", tz: "+08:00",
       place: "PARKROYAL COLLECTION Marina Bay Singapore" },
     { id: "p-sg-syd", held: "Dad's Phone (Trailfinders)", type: "flight", who: P, status: "booked",
@@ -232,7 +232,7 @@ const TRIP = {
     { id: "p-syd-sg", type: "flight", who: P, status: "booked",
       title: "Sydney → Singapore · Flight ?", held: "Dad's Phone (Trailfinders)", date: "2027-03-08", tz: "+11:00",
       notes: "Leave Australia 8 Mar. Flight number + times to add." },
-    { id: "p-sentosa", type: "stay", who: P, status: "booked", held: "Dad's Phone (Booking.com)",
+    { id: "p-sentosa", type: "stay", who: P, status: "booked", held: "Dad's Phone (Trailfinders)",
       title: "Shangri-La Rasa Sentosa", date: "2027-03-08", endDate: "2027-03-11", tz: "+08:00",
       place: "Shangri-La Rasa Sentosa Singapore", notes: "Relaxing beach finish." },
     { id: "p-home", type: "flight", who: P, status: "booked", held: "Dad's Phone (Trailfinders)",
@@ -240,7 +240,7 @@ const TRIP = {
   ]
 };
 
-const COSTS_BLOB = {"salt":"XgYQiicl4qaGn3gnwuSH9g==","iv":"koDCyhbibxjrZpqD","iter":150000,"data":"0YOdvzW/7wmQXlk9HO+bHuHiEiCBlrUr1ByDWyTu0mdHoXHgcooijJlNs8o5OUorXfNMRLnChHRkHY8Sxj7aWLQq2DQfegi9wtw/5CbLpd1ZZIy40e3xByzTw377IJmF4pNlLwaYVMoBAQ+yA80vMFXfc+q5ijZ74YkywCDt7Ak8CNKYntCSjsuVF+dG/OKJ38wM4qu0PovLlDWkUNwhakKMBLf/9jbbRLV7DnEvv9U1NoUjYud3T4RGoxAWjNclDXTS//kAs54gcsImP528xrj+wEeCNQmLQj1p88svQ3HM9NW/gTTEUnZhK5rd+4phv8bqPdOV3CCCyP52U1EXpu+yp9pIoHn2ZtInMNjiUHkKIAdkh7M6rLT/V97SGBG2AUunTVc9pEF+B2NrOLc82NJFvpw9PnE41O0XbPQnMv/ryBgLzNvx25omgvXdOnl1qBIwbAKWcaPQUadq9THEFYN9vHrrMah/sUynSiQSRCMtb3kHpBz1hpNhEspu3S9oQ6PxPfiGWA8D3hr1iBoagvGz1b1h3u9CloghnTzGWC3+wpeO7Z1vOlK+AdRlKi2N6VQJEsseg23xCVEJi/gTiZffM7FGJ7UaO2w/dzwqasM2U0Xjy7YQ9dY3zebK5yPuGk87cXeY0XrLEsX0xT+BYwmcSQSj8yA3zUCg8lXKtwjbz10tuJ99TqAgFYHC1IX4ubcPoT1uEF//hMOqc6QETFaTLZFfRdmwVUXFhlq2zcDskH0lXlvWblkXgLugqPQy+KiarEUyjEG9W98+y14IzhGuXMONWn4XHNUzbkgNU04WGV8K/c7o7hiaSSeYDZMXCm7/46YIsWtsExBVw3CxQ02iGL0H2iAoE6OspvqFodc5u9t1OwkilLUTiVZ+2BZYahyaL2Ua3w29h8+XcrnJJ7MMxGgg/88F1L7o/iL2f7fxXYBCnetzV1+8+amWSlBmYagk/rSMwk0VU80qHkSv89NP5tZRQfMaBBj1h6ZQevfVUzhDn4glt/V8PgsEZEtSozArgSaJraGR8oTbXH94Ch/ViSRDc1ZcKsdShn3r4dMFH3qDQn/J2f1vwe08KHTB89sZJ15ovECwRiu6FyCXVkyZKV+lnLqTBYdn30JafdDzCaGY+aWkt6UKQmUUwjIs8kJepfoCT46n30rE+lIWIB03ngg5HJDaQRpgSGGiBMA0LpzGPgugGNAG2r0sHL9Av3NiP2AMMgIA3lv4dG5o9ONKeqCch3qie9SYOr5nhSrhexKXjM5Aeg4UqU4Jogwa3YIILpWIXTOjvBYizLKhqQnOLHVXOLAj+G41CfY4lO0Iybgy2UgX5eryYP9Kl0NYZyLG6+BfkCzFs/qoP8g/4D8le8Vds2HdZogeJJXFbmyzepo7YDWRvYoMgX/B8Kss2rgJIG7jThXMuFriawZU0MdKG87WToN0QVfAFexJfSiKBPFr5Ww8WhXB9yVNJOw//6rO2aQfXqaa1U3l8aJFoz1RVSLQgJdtC33l7RI9pnnMTnaLknqnTTMRPIuBJd2nWPDTqDW2e2RpP03SM2PcIoh47aO6h/dCqImCLmXlCbZ2YqCVu6Pvt+5KKPFzHndI4ReuM/ryUksbKqKBmrwyWwf2sLjCFUhw59r/8Bc2QQo0HXN11zUXGcKjSoHLl4ylfymjL4aJlQ=="};
+const COSTS_BLOB = {"salt":"TncSlllxMwv7Jmr/GNrI6A==","iv":"xNb15W/AJWb+dRZM","iter":150000,"data":"qRk0oBg7suWMyOqIAcfvdVqI36eXOh8/IskGKGuraayV2F1ZpKan7trmrl+kDPJBMjq3yqTpKHV33TY4T5u+1G41RbGaOfBhtiKwAPCYvUWg6ek4ukkNqYR/Df7li1eWCaVWmZTeDsLd39zhn7ei8q67yEDIBxC9EtpwgO9HqbXwQvErPr0Uvfip/oXA6nLomnT2WKIQhqtaU8CwVD1ZnatFWmB4Hxena0P39x7FhIt69VI28/IvPXmQMEdq2GwczNoxRmzLJi5m4gkHZHvjj8cHgzz2UuSj/RFeeyq+xg9asfNZHuhoQ6cAeHTy1aT++PZDdOj5Bnsk6kFU3vkPyv3ZrdmlvWUcWdRdlTShrkjW/WppXv1oqmGj6RDnnmAUY4S/PgXDIaQ3IHe2q1Vs8n6IFvCfrk/RY2Eev9TD4nM7ETF4I4Agfza7jJTEIB7q0KdkKr2CQ+ztfPZuu/dXQsgellc9/JWTGikOg5GTPRsdJ9nQzeXOB1SqZ9Has5xqbU0YRY8UGYxAwS2RQ22tWsuFHPjVEUVaHYcfsZeaT2ouMeuxfYLjzTjnjuwhQgQxSjyskYNeP4iQ+/jKJW80ArMZtP4uVorlnXN3gSfU2gckWFKFM8qU41Ky3mBgMY8CuJV7tSsDk14Uza+eypFnhQAiGT4vYpoDPlzeqBNluCM+5+pFRXOsdYVSIWv4ztADaB1tHzEZbURHeKVqDEH/lk8EglCmjNoDz3N4oJV+JoUMAWCGZAO3TXxx9YpR6awMzAppLeWEaimyAoSh39tSiFJTJn19GBpqXR663lD7E1x1dKoGitvhesdDn3g9nc9JrwhZbHiRttgqyVwUEGxpHOsZFd3+eDlWgqc6n5Izq3Vx++1AagKo26qji8SA0ng4/PISp57lIb1iekiDStYtl2ouK1zTrQRCe6EfvD9/zbFEH47ki4Jwid/sag+Dpd+iK3EmIQ3d+ms04JHdJQSlvtAezjc8hr0zrAgbazHJGLROusMEJHAo6VKVXUssqrRjatOqxh3rNkOzcOox5s5TUjNl8wfeiE1+vKcd7z7RLaJI9TcVvmHTaiocGLKzmGJI+ecvZ/Qs2BF/DjRfoM4l5x/9f0bckgoJ7EqIeFEC+pOwBXqR2cDR45vII+MLYz3fCZEs55TTHcxcgpvCYaiV9St/FaoSFF+T8U3nnWTy4SFSGCowKpMp8M1LnbexKDWapbC1WfGJ4BcUSRjiN9g4v3Wivyprjozslq7y2P7ese+mtirlGmZH6ZcTHBWAOHOyMYmCIoCLeF6r87r/kvCucG0m1y/dwyzdmppq9iKXJsB0vYrBxJ32OOZkLdcnNwZEgLbL0UMXa7b9OP4fLZ6WNj084XmpxM+TayvvYgzzIfIaQ7JVUPazsa4oFECpJgcOxPiDlFgwCl2s2Ib01dK4rQp8tA0b1lhkQaVKJpbJTy05pl5imDCu48Koeta4JSe1rxH082qX96nz2iv1UN5Iv0+Z+8OiqrSqi1hHOurkYz4o5BGSNGLNjaRYAM3Sul+QFPlH/f3FW8WYmGYv9kNt4L/o3GOGeauvnwZmGjc1piSjs46hDIKQvKWmGTdCa9O0wRdhFeJn7by1mr3PgV8ASpKPA9NzKwlBCGKCjlMRoEhhNJHik1ZDIY37YpVU7JYNKYNnpD+2vw=="};
 </script>
 <script>
 const ICON = {flight:"✈️",stay:"🛏️",drive:"🚗",car:"🔑",activity:"🎟️",ferry:"⛴️"};
