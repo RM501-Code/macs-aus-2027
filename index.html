@@ -170,14 +170,14 @@ const TRIP = {
       place: "Oaks Brisbane on Margaret Suites" },
     { id: "bne-zoo", type: "activity", who: ALL, status: "tobook",
       title: "Australia Zoo", date: "2027-02-26", tz: "+10:00", place: "Australia Zoo",
-      notes: "~1h15 north of Brisbane – but the hire car isn't until Sat. Pick the car up Fri instead, or book a transfer?",
+      notes: "~1h15 drive north of Brisbane each way.",
       lookup: [["Tickets + opening hours", "australiazoo.com.au"]] },
 
     // ================= ROAD TRIP =================
     { id: "car-pickup", type: "car", who: ALL, status: "tobook",
-      title: "Hire car pick-up – Brisbane", date: "2027-02-27", tz: "+10:00", place: "Brisbane CBD",
-      notes: "Ryan driving. Room for 4 + luggage.",
-      lookup: [["One-way QLD → NSW drop-off fee (can be big)", "compare on rental sites"]] },
+      title: "Hire car pick-up – Brisbane Airport", date: "2027-02-25", time: "18:00", tz: "+10:00", place: "Brisbane Airport",
+      notes: "Pick up on arrival from Hamilton (time TBC). One-way to Sydney, drop off 3 Mar. Ryan driving – room for 4 + luggage.",
+      lookup: [["One-way QLD → NSW drop-off fee (can be big)", "compare on rental sites"], ["Parking at Oaks on Margaret (city centre)", "hotel website"]] },
     { id: "d1", type: "drive", who: ALL, status: "idea",
       title: "Brisbane → Byron Bay", date: "2027-02-27", tz: "+11:00",
       hrs: "~2h", stops: ["Gold Coast – lunch"],
@@ -240,7 +240,7 @@ const TRIP = {
   ]
 };
 
-const COSTS_BLOB = {"salt":"Cw9BQQuPUsYcd2o/GXl+aA==","iv":"vFJvsFAYqRW12lpn","iter":150000,"data":"e8PmVss2mr4IuUNi3WjsnEnQTMlDG0bYquYy3HO2TyTsMbZiQC+NMdV2fbbeZMGuYnrf7IC3sKPY6J462MCioGhSbOhdkc6PQmonmv/MMdKIr8efeaNFu5FpTMQFUeFWvDmeeAAUdo1UzNHqIZYXy8nSQTnem995zDSNu6WrP/2VesbnHgpxaIGePgiFEAWzJ8BBlIRMOa9vQNiO2LuPMsYFTbJ9GowkFijFAFdRYyaL8Fwt+IK/l0gPwCFe/AxGWheX+YcwFDMbPSjf0m07RZeZDYVxv76LTh7LqAsJ5cG5fcIo0JH3TyqNXiSjFWa5nU6fCu56io2pGNsPxdmc8mi17GYGKJFsgFL17koA4VR9nLN1WwYqBKj3cduCXz1RZ2V/1gmwDZkqf+CWJVSc9niBejH9nzwVifbs+v1Xcswtrd4Mwyzn8JggdZEKqoK0xCsSXimlqjzq5/NoKIxETNqIEF9zZCNTO2aZQzxnHB+yRPAkNTJgWUOrqhNOnVI3hyDC38syL0vd3LntkP2QQj8UsEu8fvdNB88fDYtZBgUUD60ShYYVvgwLalzSB+muGgPF0WiBY0gLaHCx2MtJZQd8H7XuTBhEJ/Tt15dAHMsUMnzmfIqWoCsm551a7N2bo566wPOsAf10Fxs36C08vHAQf7vD2AsmC0e6BlR2la4crFlNCkeZyWoeWTK9bx6tLVowM04vJqPKCu8su+cgF8Vo9jOxcSH7fHxrEaRHHjk3hmKjNEqGa02GcgGDstzj5rf8IOLBwSAwr6vQVt79Q+1/O3xQNK8FRXiQzXAJvi6dj4yTR7rjRXikKrgqlanZkiVoDgdzXTcvcNhe2yFoV7Z5I5f2MRqtDmYDiYi6AOzCnvKbyb+jo0MiQgQ7BXJHHwVM3GGEh2Vn6Tfd2Ti65cCmFThh5aHNx4OsIxLVNM2ea8BSKeVNBdIkVSZTPG38VuXrWi6YDYjaqJ5yHZC0XUbq8PGD6wSBKWQ+SsEfUxAJR5zSrB57d/rVN6ey8RgQee71VyLJ8zYQg8ocktOeUTIK0XzJ/Qy7bLTYZyoYnBK05qSwqm5VcbiAlDa9xuuq2Xh8mWapNkdkctzg/ZMDf99LEvTI6sBPGOr/WJ6O29n1F9EX5+Z4tclhw+5eV8w/Jfa+qOIxjSUdVtqRdo7X3oRYUFXqzuWHrv9o5Q4J4RoecKMYAfTkpMUOvT4MXhnFf50tXuwN7Egt2F37V8rSR8/Cdcvv7LlLTHbQhnPf9Sdf+g0mBO6O8XdNp7xu/ZtXM5nKL0F6tBctWxNkokULJyo8D+k3FQx7LpuB32HO93dQ2jovEH8uuhk0F46/4vhVTGPq+9x2Lq3WbZzyOzQ1ThY+B98Z4+FrB8pDcpFxl7t3aNLqpBjqDLZqT76ke7z/bcMc81JyUNz6k9/GIWvJzlbByG9NN6ia9r/zLKJQqxwgk75ElJiYp2NxbNhVFvhxsxPBGGe++ZQrK7jkKvjE5fsNZjlmiKdjJAJRBwE2ChrXcvjSqjof+J4GhHbzOLAFoDRLshGuVX5b0eiNmMWJBE2qFs0P1JhwV0A1r2nzAh61+UTUUUWrp34Hp600ERkKLJuJOabqlI+m0kcrOUpwwmZEV15dLUgGCoeikCgfHzbKdnBmvGShhN6MmNPuEoSNLlshvakxeA=="};
+const COSTS_BLOB = {"salt":"+4IF4g5VNlVd/Eadve0qgg==","iv":"fhfZNWHZlbjtmuOr","iter":150000,"data":"ylGdKmDOYJDVQpCyvEK4a34mSonkncyBxY++B3qzHj7L1DOoO2h6d+qIA8SDsq6YsyRDERKcCxra5fjnoejjMbF0O4ZB6Xq6RdDkR5xQnhDs+gzkPJ0D0aDvkdbnzMOrEtx50Cc6okp4otWj1Arh/q5JlETjGeMLF0zzyo1VlbGF4y+mmOLxl83iBwd3L9ZON7Svp+X/h2ekW1iCJREbXkAfFgDDMVyJvYAqowKMpbL8ixPalNPcAXVHXCtfj9lI7MqIQFvOpVd02NxMO/fKvrnH9efW0PZlBxAl/8FAjyrvxaRJqEn0KiUy8UDxMIxfvFS1VQxVwyY/cdLrY7rJ7EVqLml7tbKLUF2XCgCPF9NR6gq+gTvL78wIINQjR1te3EGWUsnKoQsXAubZ4vrY+23ZitMl97STLuL1fuq2NZAdKrVhTzXVmusLO3ryC2071RCiBnoHsZ5V20xVh0h2bpkSh66UfVcjKk0JJ9E3MO0/MB6FHQGc/4DYlQJMZ/mpcGL/9yMllJErqR4g7V2j3xJtp+xxvkl1E2pKozmw8N68XnyXb0M/0JNmtb8FnwlzkbgoOBnTF5BDhRp1+A5xnjNy3Vw4JzflsjTMVuhC7d3Pa9clD6rr4wp5rfvGiZqw3N5yyVwH5CSgYVLR/QjiQX48XYx3PDjc9pgbuZDC5AcAokZssfr3rr90GZb6Pw4tjaGQdi8TD4QJ0q5CZeZbB42iP6hLsQjOys5rxnDlpeNGLnrCnRRGkLP1+s3Tb/e1IDq7TRZ5MmEJAyT9KN0s4Jr9KpjcSHwet1VRO5EQX8mgzDrcjuOx31cb+Jy9TtlKMeoZotYCWm5zSqP7AesCXJBl99R9GYg3NS5oWLN0Zc4qAO4dG97vM/guKCny54CNyuRagmvDYyttwkaddJQCuy4EqEnfiEv0m2TxrdPzSESUjOiP3n3hArVvG+JIUsXaIbG7LrMXVse31wU/FBqYTZfNd7/FKa1OB15ib3X8SeWTTv3ebQd57GOx4qFkc9twJ34SF7K2H0QBnefMEDQrKFUATZVOJZxpMw5AP+R2ywTt/PTmHUv7tf8VJLx0HqJLOS6vuXYy0znD3IYxtHZE97Nt6l9BocUNBs9yu34w52KVQ4Mz68+R9gDIbqEaWY3FfdHSWRKCMLApjwSbb8PpBk8he4IEEExLI/oalhnXY7pNX91CS6m+or6mGmMBmhEAalv4RYRV4xQshCJmN2gZx1zampSQY0VQh/fNUq8oZ6ICoxJv0THs0gfZEcYkkkt4GK39feoXTmQ+plWPPYUKk2UXtl9vt6NYrk3PDD70Y3Ng+mdTky7Xp3wbTAUGleIAbKcYYiFBj4VHz0s67Ww52dZsSwzZDrnRIHQJM7I6lAwLH8dKoqMRaKwAFvg0ue3t18Q8bSXLqQiwBOYPA/1xjkf9uLUYQyPDyUm2gPZZ5328C7LlYXn0XmEJJ3ZBMtLxYjiDLLbP1/5MXcxfeCI+/t3+ENcYVn3n2K0FX2mrhUMiL9VYLx/kLHGMr3jHF7iVr4icRn7qsv2B9Gxh0uXG/F54tfsPaDmuLmg27Wd+MCjgISd4dz6SEcHz6MHKQk1U9y541IByj3Ae1YxnftEFNd2VkZ7hAudOMoZBqYfjogGbZ/71WLo+RkTETm2bdt7f4ZS3DJ8NWA=="};
 </script>
 <script>
 const ICON = {flight:"✈️",stay:"🛏️",drive:"🚗",car:"🔑",activity:"🎟️",ferry:"⛴️"};

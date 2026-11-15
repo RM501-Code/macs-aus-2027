@@ -95,14 +95,14 @@ const TRIP = {
       place: "Oaks Brisbane on Margaret Suites" },
     { id: "bne-zoo", type: "activity", who: ALL, status: "tobook",
       title: "Australia Zoo", date: "2027-02-26", tz: "+10:00", place: "Australia Zoo",
-      notes: "~1h15 north of Brisbane – but the hire car isn't until Sat. Pick the car up Fri instead, or book a transfer?",
+      notes: "~1h15 drive north of Brisbane each way.",
       lookup: [["Tickets + opening hours", "australiazoo.com.au"]] },
 
     // ================= ROAD TRIP =================
     { id: "car-pickup", type: "car", who: ALL, status: "tobook",
-      title: "Hire car pick-up – Brisbane", date: "2027-02-27", tz: "+10:00", place: "Brisbane CBD",
-      notes: "Ryan driving. Room for 4 + luggage.",
-      lookup: [["One-way QLD → NSW drop-off fee (can be big)", "compare on rental sites"]] },
+      title: "Hire car pick-up – Brisbane Airport", date: "2027-02-25", time: "18:00", tz: "+10:00", place: "Brisbane Airport",
+      notes: "Pick up on arrival from Hamilton (time TBC). One-way to Sydney, drop off 3 Mar. Ryan driving – room for 4 + luggage.",
+      lookup: [["One-way QLD → NSW drop-off fee (can be big)", "compare on rental sites"], ["Parking at Oaks on Margaret (city centre)", "hotel website"]] },
     { id: "d1", type: "drive", who: ALL, status: "idea",
       title: "Brisbane → Byron Bay", date: "2027-02-27", tz: "+11:00",
       hrs: "~2h", stops: ["Gold Coast – lunch"],
