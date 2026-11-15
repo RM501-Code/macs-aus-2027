@@ -88,15 +88,15 @@ const TRIP = {
   people: { mum: "Mum", dad: "Dad", ryan: "Ryan", bobbi: "Bobbi" },
   items: [
     // ================= MUM & DAD: SINGAPORE =================
-    { id: "p-uk-sg", held: "Dad's phone", type: "flight", who: P, status: "details",
-      title: "London → Singapore", date: "2027-02-08", tz: "+00:00",
-      notes: "Booked. Need flight number + times." },
+    { id: "p-uk-sg", held: "Dad's phone", type: "flight", who: P, status: "booked",
+      title: "London → Singapore · Flight ?", date: "2027-02-08", tz: "+00:00",
+      notes: "Flight number + times to add." },
     { id: "p-sg-stay", held: "Dad's phone", paid: true, type: "stay", who: P, status: "booked",
       title: "PARKROYAL COLLECTION Marina Bay", date: "2027-02-09", endDate: "2027-02-13", tz: "+08:00",
       place: "PARKROYAL COLLECTION Marina Bay Singapore" },
-    { id: "p-sg-syd", held: "Dad's phone", type: "flight", who: P, status: "details",
-      title: "Singapore → Sydney", date: "2027-02-14", tz: "+11:00",
-      notes: "Booked. Lands Sun 14 Feb – need flight number + times." },
+    { id: "p-sg-syd", held: "Dad's phone", type: "flight", who: P, status: "booked",
+      title: "Singapore → Sydney · Flight ?", date: "2027-02-14", tz: "+11:00",
+      notes: "Lands Sun 14 Feb. Flight number + times to add." },
 
     // ================= SYDNEY (Bobbi joins) =================
     { id: "syd-1", type: "stay", who: PB, status: "tobook",
@@ -125,7 +125,7 @@ const TRIP = {
       depPlace: "Cairns", depTime: "09:55", depTz: "+10:00", arrPlace: "Proserpine", arrDate: "2027-02-21", arrTime: "11:20", arrTz: "+10:00",
       notes: "Times are a guess (~09:55 → 11:20). Then taxi to Airlie Beach (~35 min).",
       lookup: [["Confirm flight days + times", "skytrans.com.au"]] },
-    { id: "airlie-stay", amend: "2027-02-11", type: "stay", who: PB, status: "booked",
+    { id: "airlie-stay", held: "Dad's phone", pay: "2027-02-17", cancel: "2027-02-19", type: "stay", who: PB, status: "booked",
       title: "Airlie Beach Hotel", date: "2027-02-21", endDate: "2027-02-22", tz: "+10:00",
       place: "Airlie Beach Hotel" },
 
@@ -149,9 +149,9 @@ const TRIP = {
       title: "Ferry: Port of Airlie → Hamilton Island", date: "2027-02-22", time: "09:00", tz: "+10:00",
       place: "Port of Airlie", notes: "Morning ferry, ~9–9:30am.",
       lookup: [["Ferry times + tickets", "Cruise Whitsundays website"]] },
-    { id: "r-syd-ham", held: "Ryan's phone", type: "flight", who: ["ryan"], status: "details",
-      title: "Sydney → Hamilton Island", date: "2027-02-22", tz: "+10:00",
-      place: "Hamilton Island Airport", notes: "Booked. Need flight number + landing time." },
+    { id: "r-syd-ham", held: "Ryan's phone", type: "flight", who: ["ryan"], status: "booked",
+      title: "Sydney → Hamilton Island · Flight ?", date: "2027-02-22", tz: "+10:00",
+      place: "Hamilton Island Airport", notes: "Flight number + landing time to add." },
     { id: "ham-stay", held: "Ryan's phone", pay: "2027-01-20", cancel: "2027-01-22", type: "stay", who: ALL, status: "booked",
       title: "Frangipani Apartments", date: "2027-02-22", endDate: "2027-02-25", tz: "+10:00",
       place: "Frangipani Hamilton Island", notes: "🎉 Everyone together from here." },
@@ -229,18 +229,18 @@ const TRIP = {
       notes: "Assumed 14 March – confirm date + details." },
 
     // ================= MUM & DAD: HOME VIA SENTOSA =================
-    { id: "p-syd-sg", type: "flight", who: P, status: "details",
-      title: "Sydney → Singapore", date: "2027-03-08", tz: "+11:00",
-      notes: "Leave Australia 8 Mar. Need flight details." },
-    { id: "p-sentosa", type: "stay", who: P, status: "tobook", approx: true,
+    { id: "p-syd-sg", type: "flight", who: P, status: "booked",
+      title: "Sydney → Singapore · Flight ?", held: "Dad's phone", date: "2027-03-08", tz: "+11:00",
+      notes: "Leave Australia 8 Mar. Flight number + times to add." },
+    { id: "p-sentosa", type: "stay", who: P, status: "booked",
       title: "Shangri-La Rasa Sentosa", date: "2027-03-08", endDate: "2027-03-11", tz: "+08:00",
-      place: "Shangri-La Rasa Sentosa Singapore", notes: "Dates TBC." },
-    { id: "p-home", type: "flight", who: P, status: "details", approx: true,
-      title: "Singapore → London", date: "2027-03-11", tz: "+08:00" }
+      place: "Shangri-La Rasa Sentosa Singapore", notes: "Relaxing beach finish." },
+    { id: "p-home", type: "flight", who: P, status: "booked", held: "Dad's phone",
+      title: "Singapore → London · Flight ?", notes: "Flight number + times to add.", date: "2027-03-11", tz: "+08:00" }
   ]
 };
 
-const COSTS_BLOB = {"salt":"6LBzBlRxfa9oPdJvKUHDmg==","iv":"CWrKhSMHFGxaZtbS","iter":150000,"data":"FPeXF1h9d2YKRNMJt1M1sTV38khk13n1YGu1JhB/g5cLHX0SMufOS8eoJxonRpHi2o8BXzdEFQ7j1q4SoAffvq3PRst/VgxOXAYdHTm1s+GLzwMtQR3gIWk3yx+zJg7EEL2umjgAO6jEYaITlShDpNE095MlYJ3D+RF8yCGp+ps5PLGhXn0kU3bdDgK2OzdtPvmqO3HQdEZJgyRcvIeLfhmeUBqOyOUIy1bxcty2P26GedNlAB+coE1W0zK3W77vQaunsJlKPpE3ShxpKy1PO/Zz4Hy15om4bA7wnChGugb9fscpuOqtvYcsWHCWewinj49kwT6BQmrtnVy4ki/3CwS1+L+J/teZwawFZAt5DSKk7IurcM7O0LG84OVa9ZuriF7qrdJY9aC6bmATwZpsEVnIP1Mrx3W2+bEuydqjxvz3O798KqOR+r7ZWVQvNDzRH3ZMaiLifGlyV73UKv/gACf/ANPtjGQvQdfjemvypdIG5ScuzUx0u63pYf7sZKInCI7fH3kkiM7lvrlqjJmc4nONlJtptRbQktZEYKP6Be4ez3CQfb6e4K+IFrN3dMrAmEtq1dYdWs+Zvfwlvvu29iX++szrZzm4GzJGTvmRUe6JXD66aTg00JosWlcGugtwdKRpdwC8CiqMAuTTkZXuJZqCm5LQHq+UmCkhpMp9P1jJqz1hVIqUz1T2BiH/oaHRVslLR3ZqJIYx590t2482cD8L3uBwcP4kjZAWe3eiITIL4a1yB4LqZ+KYuh4EVd/K3bOM8FJluc9Ubj+J9xdXHvXGidc+pNYEr2Tm68fVItWgpCJ1tZJJytvZNV2ISkNM+A97fn5Tlt0zd1EnwCpb9ie+7yy0YgUdCxbG9qNkD5l2DqBaZ7xFt0xN/NOjkGxIEAS3/QCilfhUQyhVS5TSKyNeSlKQk5YX028zvfmWIi9MxNVMsmLiydPYml2YjutFcyX+z1DGHjsK+Odoh9CJWrbShswKYMcMY1LrHybGkJmxReF3bpArU2wAO3h+35nCuFaM9OM51Xd12M2jpE7xuyTI5lghR0p/Cnd5HyXf05ECLc5Q7BDd1jNxdoBYIBC9bJoTnmA/Al4tj/cebE5mZVVP+8Lg2XD6DQuC9SlQtL9XLVjdMVSME5DQXQ8fcW1bCWPBbB0SjVnrddq2CNGCEwW2pEv5CwydjN522IwbE1JDTE7bDyS3Wo0rqHSPT2OrSSxihStlB/q7PvSw++On03FxQHej1CUXtI9O36ypxBhVuXeXhM2Lt7JxZ1v1nUZcOA=="};
+const COSTS_BLOB = {"salt":"V1OnXh397c9FzRVE5ZpTcw==","iv":"3GfCOv8eXdncHBfN","iter":150000,"data":"fX9g6g07bfk29TeF49XpJNEcuXLBuCStQ9RRo+m/aHDzA0YqB4fqsESi08Qtipk6NHgqNdUa6n3MUp93hVwwEmX6xhJ2DiAjcSJu2Spp0AMbTmAo+KIPRsolmXAE4nWoBUqUF4IAYCqVALbsdZM3Z2ckuUKjn0qJcMUJV/PUX6qwvtpbTDB7ooFX1akOzIdSZ1hfajRBRBmL5ZhUFFrykek8Ma8qwYxZf0O+i5VzmlrAYgCS08k0ShAeeNM6vtB1E4KJaVConNSTzUjegekL6I4xD9efNsyfyYkv9rdLg76FJj4qtORlaiFKcaKJBzjwJjWvVkdwXPxbGjRBlWCLyImTh0jwOhGFyOtRHbg44z40PunlgznH5zIR3Or53iPUgzl/iiltrCnw5e25E4/5wTVTEBVxr5kR2qKYVC+bnqY4XbqSagVQ7dLYUzHBdfIksOB9da/qG7z0y+f5+p2BJoqX3jqYP9JS/D5/cS2KdGq4ZyH6rnaTnd6s6GqtfYAX+/10uKP1h4cuiOUWdaGcpNcB6MBua7naKKCr1mkF7+0ot2fIq0hHLFGFDDF8jQMLHA47hfl28srjYE0i2C/iKclzOUPlYb91KxjmNH49KF7lRIdTbKB8ugqLBYIyMlfo+yeH266FpiS1bPJ0lE+KnzinTguv7uk2QmjfXE8JNP9QkJMSH6w6sRnoGrV095+28ZR0+jOwiJTGpKZ4RRPZgVX89VBY8Wn7MkMG8MT6EskDqLY9H4W/OeiyKHWKajgm+sRobZb68xYP1wl6BAcRSQrh+BOX4BTkm/YlevRw1tDlWmRa9/hV0tUNqRvS4p7fwUIpQceCk+KnB5xrDq2YmX7O2PA4HfW+XOEfljuR6sxeJwMDd5A7oKY4nlrSRrZWegmlamwPScohpxaoo3LhUNDki4KfjgaAlSErRktYIISPNBgrlWWPO7AGNW3b8kvw5dDh/cxB3s3SJadPbnfhrJ+PJXt6S2W3iPme6R7b2ue+LnGSIbYYIy5EvMfYNK/GG4TkPTuG0TM5WJTh/nwevTT5mWV+f2/AUiQPhYoIesuq/1THCGPKmSS4k1HOAOtAscLvwSYdEyKTDihORB/i86S91lTSwIi3peFWAiJotryoKu7WdqJ1mGQT/Qftd6AinuV92Pgxz2T1wYG4izPulARmDHw4aDPF8LAq7aAxatWJKsKs5bE8D8A+Ccxl1PGvntJiLugcjdS8anYpWcLnueTak40ES/srDr1VQQZGoXhH1eRYe2Wn0Ncgwys2tDzAwzzYiXaI8Z5Mt5vsv5yRR+gticjzqvt/e9sFiIPSd1kPiDCcwDssnyGj1bN6WnDdWqy7NIrvVXHMHqVMnIvqVY2LoI2q6FN7D8OR7VqGMTMtQmRpf1LRzrnrNzXCMhSWJDLvAxhvEZFTTjyXX8VhhnQFBI/IJ7lPC2YunGLb4KMKvQpbxgwkKn0IQtnQrHC7gFS4sYLOsjS7b5W//ULMHocd2puczb/0EabPE/A+EauTlhLDt//RAGVmCLgGkIxCSV6TB4dTJjOvkx14mdBl3DdXdTjBmys+aku019a3sIcuFnU5i6M1PeweOLNQzUrN7mnXlbx9hejnbcYlj0eFsnHv2Ii3i0uqys6LHUd8hUNNQgXiLVy/Z4fNYD3TBkaJda9lUPGKbg=="};
 </script>
 <script>
 const ICON = {flight:"✈️",stay:"🛏️",drive:"🚗",car:"🔑",activity:"🎟️",ferry:"⛴️"};

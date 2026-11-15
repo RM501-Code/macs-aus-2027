@@ -13,15 +13,15 @@ const TRIP = {
   people: { mum: "Mum", dad: "Dad", ryan: "Ryan", bobbi: "Bobbi" },
   items: [
     // ================= MUM & DAD: SINGAPORE =================
-    { id: "p-uk-sg", held: "Dad's phone", type: "flight", who: P, status: "details",
-      title: "London → Singapore", date: "2027-02-08", tz: "+00:00",
-      notes: "Booked. Need flight number + times." },
+    { id: "p-uk-sg", held: "Dad's phone", type: "flight", who: P, status: "booked",
+      title: "London → Singapore · Flight ?", date: "2027-02-08", tz: "+00:00",
+      notes: "Flight number + times to add." },
     { id: "p-sg-stay", held: "Dad's phone", paid: true, type: "stay", who: P, status: "booked",
       title: "PARKROYAL COLLECTION Marina Bay", date: "2027-02-09", endDate: "2027-02-13", tz: "+08:00",
       place: "PARKROYAL COLLECTION Marina Bay Singapore" },
-    { id: "p-sg-syd", held: "Dad's phone", type: "flight", who: P, status: "details",
-      title: "Singapore → Sydney", date: "2027-02-14", tz: "+11:00",
-      notes: "Booked. Lands Sun 14 Feb – need flight number + times." },
+    { id: "p-sg-syd", held: "Dad's phone", type: "flight", who: P, status: "booked",
+      title: "Singapore → Sydney · Flight ?", date: "2027-02-14", tz: "+11:00",
+      notes: "Lands Sun 14 Feb. Flight number + times to add." },
 
     // ================= SYDNEY (Bobbi joins) =================
     { id: "syd-1", type: "stay", who: PB, status: "tobook",
@@ -50,7 +50,7 @@ const TRIP = {
       depPlace: "Cairns", depTime: "09:55", depTz: "+10:00", arrPlace: "Proserpine", arrDate: "2027-02-21", arrTime: "11:20", arrTz: "+10:00",
       notes: "Times are a guess (~09:55 → 11:20). Then taxi to Airlie Beach (~35 min).",
       lookup: [["Confirm flight days + times", "skytrans.com.au"]] },
-    { id: "airlie-stay", amend: "2027-02-11", type: "stay", who: PB, status: "booked",
+    { id: "airlie-stay", held: "Dad's phone", pay: "2027-02-17", cancel: "2027-02-19", type: "stay", who: PB, status: "booked",
       title: "Airlie Beach Hotel", date: "2027-02-21", endDate: "2027-02-22", tz: "+10:00",
       place: "Airlie Beach Hotel" },
 
@@ -74,9 +74,9 @@ const TRIP = {
       title: "Ferry: Port of Airlie → Hamilton Island", date: "2027-02-22", time: "09:00", tz: "+10:00",
       place: "Port of Airlie", notes: "Morning ferry, ~9–9:30am.",
       lookup: [["Ferry times + tickets", "Cruise Whitsundays website"]] },
-    { id: "r-syd-ham", held: "Ryan's phone", type: "flight", who: ["ryan"], status: "details",
-      title: "Sydney → Hamilton Island", date: "2027-02-22", tz: "+10:00",
-      place: "Hamilton Island Airport", notes: "Booked. Need flight number + landing time." },
+    { id: "r-syd-ham", held: "Ryan's phone", type: "flight", who: ["ryan"], status: "booked",
+      title: "Sydney → Hamilton Island · Flight ?", date: "2027-02-22", tz: "+10:00",
+      place: "Hamilton Island Airport", notes: "Flight number + landing time to add." },
     { id: "ham-stay", held: "Ryan's phone", pay: "2027-01-20", cancel: "2027-01-22", type: "stay", who: ALL, status: "booked",
       title: "Frangipani Apartments", date: "2027-02-22", endDate: "2027-02-25", tz: "+10:00",
       place: "Frangipani Hamilton Island", notes: "🎉 Everyone together from here." },
@@ -154,13 +154,13 @@ const TRIP = {
       notes: "Assumed 14 March – confirm date + details." },
 
     // ================= MUM & DAD: HOME VIA SENTOSA =================
-    { id: "p-syd-sg", type: "flight", who: P, status: "details",
-      title: "Sydney → Singapore", date: "2027-03-08", tz: "+11:00",
-      notes: "Leave Australia 8 Mar. Need flight details." },
-    { id: "p-sentosa", type: "stay", who: P, status: "tobook", approx: true,
+    { id: "p-syd-sg", type: "flight", who: P, status: "booked",
+      title: "Sydney → Singapore · Flight ?", held: "Dad's phone", date: "2027-03-08", tz: "+11:00",
+      notes: "Leave Australia 8 Mar. Flight number + times to add." },
+    { id: "p-sentosa", type: "stay", who: P, status: "booked",
       title: "Shangri-La Rasa Sentosa", date: "2027-03-08", endDate: "2027-03-11", tz: "+08:00",
-      place: "Shangri-La Rasa Sentosa Singapore", notes: "Dates TBC." },
-    { id: "p-home", type: "flight", who: P, status: "details", approx: true,
-      title: "Singapore → London", date: "2027-03-11", tz: "+08:00" }
+      place: "Shangri-La Rasa Sentosa Singapore", notes: "Relaxing beach finish." },
+    { id: "p-home", type: "flight", who: P, status: "booked", held: "Dad's phone",
+      title: "Singapore → London · Flight ?", notes: "Flight number + times to add.", date: "2027-03-11", tz: "+08:00" }
   ]
 };
