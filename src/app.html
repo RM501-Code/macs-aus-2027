@@ -359,9 +359,17 @@ async function drawMap(){
   if(!stops.length) return;
   MAP = L.map("map", {zoomControl:false}); MAP.attributionControl.setPrefix(false);
   let tileErr = 0, tileOk = 0;
-  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", {maxZoom:16, attribution:"Tiles © Esri"})
-    .on("tileerror", () => { if(++tileErr > 6 && !tileOk) noSignal(); }).on("tileload", () => tileOk++).addTo(MAP);
-  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}", {maxZoom:16}).addTo(MAP);
+  const E = n => `https://server.arcgisonline.com/ArcGIS/rest/services/${n}/MapServer/tile/{z}/{y}/{x}`;
+  const watch = l => l.on("tileerror", () => { if(++tileErr > 6 && !tileOk) noSignal(); }).on("tileload", () => tileOk++);
+  const bases = {
+    "Grey": L.layerGroup([watch(L.tileLayer(E("Canvas/World_Light_Gray_Base"), {maxZoom:16, attribution:"Tiles © Esri"})), L.tileLayer(E("Canvas/World_Light_Gray_Reference"), {maxZoom:16})]),
+    "Colour": L.layerGroup([watch(L.tileLayer(E("World_Street_Map"), {maxZoom:18, attribution:"Tiles © Esri"}))]),
+    "Satellite": L.layerGroup([watch(L.tileLayer(E("World_Imagery"), {maxZoom:18, attribution:"Tiles © Esri"})), L.tileLayer(E("Reference/World_Boundaries_and_Places"), {maxZoom:18})])
+  };
+  const chosen = bases[ls.get("mapStyle")] ? ls.get("mapStyle") : "Grey";
+  bases[chosen].addTo(MAP);
+  L.control.layers(bases, null, {position:"topright", collapsed:false}).addTo(MAP);
+  MAP.on("baselayerchange", e => ls.set("mapStyle", e.name));
   const aus = stops.filter(s => s.lng > 110);
   MAP.fitBounds(L.latLngBounds((aus.length ? aus : stops).map(s => [s.lat, s.lng])).pad(.08));
   const groups = [];   // same place visited twice (e.g. Sydney) → one pin "2·10"
