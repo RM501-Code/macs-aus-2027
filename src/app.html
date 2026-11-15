@@ -10,6 +10,8 @@
 <meta name="apple-mobile-web-app-title" content="Mac's Aus 27">
 <meta name="theme-color" content="#ffffff">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<script src="vendor/leaflet.js"></script>
 <link rel="apple-touch-icon" href="icon-180.png">
 <style>
 :root{--bg:#ffffff;--card:#ffffff;--ink:#14202b;--muted:#6b7280;--line:#e6e8eb;--ochre:#0c447c;--euc:#185fa5;--sky:#185fa5;--warn:#b7791f;--r:14px;--soft:#f4f6f8}
@@ -208,6 +210,12 @@ function today(){
 }
 
 function timeline(){
+  const sw = `<div style="display:flex;background:var(--soft);border-radius:10px;padding:3px;margin-bottom:12px">${[["list","🗓️ List"],["map","🗺️ Map"]].map(([k,l]) =>
+    `<button onclick="setView('${k}')" style="flex:1;border:0;border-radius:8px;padding:8px;font-size:14px;${view===k?"background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1);font-weight:600":"background:none;color:var(--muted)"}">${l}</button>`).join("")}</div>`;
+  if(view==="map") return sw + mapView();
+  return sw + timelineList();
+}
+function timelineList(){
   const list = items();
   if(!list.length) return `<div class="empty">Nothing tagged for ${TRIP.people[who]} yet.</div>`;
   let h = `<div class="legend"><span>✅ booked</span><span>❓ need details</span><span>⚠️ to book</span><span>💡 idea</span></div>`, cur = "";
@@ -228,8 +236,8 @@ function todo(){
 function info(){
   const ppl = who==="all" ? null : who;
   const items = CHECKLIST.filter(c => !ppl || c.who.includes(ppl));
-  let h = `<h2>✈️ Before you go</h2>`;
-  h += items.length ? items.map(c => {
+  let h = "";
+  if(me) h += `<h2>✈️ Before you go${ppl?" – "+TRIP.people[ppl]:""}</h2>` + (items.length ? items.map(c => {
     const names = c.who.filter(w => !ppl || w===ppl);
     const allDone = names.every(w => c.done.includes(w));
     return `<div class="card item-wrap" onclick="this.classList.toggle('open')">
@@ -237,7 +245,7 @@ function info(){
       <div>${names.map(w => `<span class="tag" style="${c.done.includes(w)?"background:#eaf3de;color:#27500a":""}">${c.done.includes(w)?"✅":"⬜"} ${TRIP.people[w]}</span>`).join("")}</div></div>
       <div class="st">${allDone?"✅":"⚠️"}</div></div>
       <div class="more" onclick="event.stopPropagation()"><p>${esc(c.how)}</p>${c.link?`<div class="row"><a class="btn" target="_blank" href="${c.link}">🔗 Official site</a></div>`:""}</div></div>`;
-  }).join("") : `<div class="card meta">Nothing on the list for ${TRIP.people[who]}.</div>`;
+  }).join("") : `<div class="card meta">Nothing on the list for ${TRIP.people[who]}.</div>`);
   const tel = (n, l) => `<a class="btn" href="tel:${n.replace(/\s/g,"")}">📞 ${l}</a>`;
   h += `<h2>🚨 Emergency</h2>
   <div class="card"><div class="t">Australia</div><div class="meta">Police, fire, ambulance</div><div class="row">${tel("000","000")}${tel("112","112 (any mobile)")}</div></div>
@@ -255,24 +263,50 @@ function info(){
   <p>🧴 <b>UV is brutal</b> – sun cream, hat, sunglasses, even on cloudy days.</p>
   <p>🚗 <b>Driving</b>: on the left. Watch for kangaroos at dawn and dusk. Speed cameras everywhere.</p>
   <p>💳 <b>Money</b>: tap to pay works almost everywhere. Tipping isn't expected.</p></div>`;
+  if(me) h += `<p class="meta" style="text-align:center;margin-top:24px">Signed in as <b>${TRIP.people[me]}</b> · <a href="#" onclick="signout();return false">Sign out</a></p>`;
   return h;
 }
-// ---------- costs (encrypted with family code) ----------
+// ---------- sign-in + costs ----------
+// Each family member signs in once with their own code. Costs are encrypted separately for each code in COST_CODES.
+const PEOPLE_CODES = ["ryan","dad","mum","bobbi"];
 const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
-async function decrypt(code){
+async function decryptOne(code, B){
   const enc = new TextEncoder();
-  const key0 = await crypto.subtle.importKey("raw", enc.encode(code.trim().toLowerCase()), "PBKDF2", false, ["deriveKey"]);
-  const key = await crypto.subtle.deriveKey({name:"PBKDF2", salt:b64(COSTS_BLOB.salt), iterations:COSTS_BLOB.iter, hash:"SHA-256"}, key0, {name:"AES-GCM",length:256}, false, ["decrypt"]);
-  const out = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64(COSTS_BLOB.iv)}, key, b64(COSTS_BLOB.data));
+  const key0 = await crypto.subtle.importKey("raw", enc.encode(code), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey({name:"PBKDF2", salt:b64(B.salt), iterations:B.iter, hash:"SHA-256"}, key0, {name:"AES-GCM",length:256}, false, ["decrypt"]);
+  const out = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64(B.iv)}, key, b64(B.data));
   return JSON.parse(new TextDecoder().decode(out));
 }
+async function decrypt(code){
+  code = code.trim().toLowerCase();
+  for(const B of COSTS_BLOB){ try{ return await decryptOne(code, B); }catch(e){} }
+  throw new Error("no");
+}
 let COSTS = null;
+let me = ls.get("me");
 let hideAmts = ls.get("hideAmts") === "1";
-async function costs(){
-  if(!COSTS) return `<div class="card" style="margin-top:20px"><div class="t">🔒 Family only</div>
-    <p class="meta">Enter the family code once – this phone will remember it.</p>
-    <form onsubmit="unlock(event)"><input id="code" type="password" autocomplete="off" placeholder="Family code"><div class="row"><button class="btn primary" style="width:100%;justify-content:center;padding:11px">Unlock</button></div></form>
+function signinView(){
+  return `<div class="card" style="margin-top:20px"><div class="t">👋 Family sign-in</div>
+    <p class="meta">Enter your code once – this phone will remember you.</p>
+    <form onsubmit="signin(event)"><input id="code" type="password" autocomplete="off" autocapitalize="off" placeholder="Your code"><div class="row"><button class="btn primary" style="width:100%;justify-content:center;padding:11px">Sign in</button></div></form>
     <p class="meta" id="err"></p></div>`;
+}
+async function signin(e){
+  e.preventDefault(); const c = $("#code").value.trim().toLowerCase();
+  if(!(await applyCode(c))){ $("#err").textContent = "That code didn't work – try again."; return; }
+  who = me; go("today");
+}
+async function applyCode(c){
+  try{ COSTS = await decrypt(c); }catch(e){ COSTS = null; }
+  const name = c.replace(/[^a-z]/g,"");
+  if(!COSTS && !PEOPLE_CODES.includes(c)) return false;
+  me = PEOPLE_CODES.includes(name) ? name : null;
+  ls.set("famcode", c); if(me) ls.set("me", me);
+  return true;
+}
+function signout(){ try{ localStorage.removeItem("famcode"); localStorage.removeItem("me"); }catch(e){} me = null; COSTS = null; who = "all"; go("today"); }
+async function costs(){
+  if(!COSTS) return signinView();
   const gbp = n => hideAmts ? "£ ••••" : "£" + n.toLocaleString("en-GB");
   let total = 0, tbcAll = 0;
   const rows = Object.entries(COSTS).map(([cat, lines]) => {
@@ -285,10 +319,68 @@ async function costs(){
   return `<div class="hero" style="position:relative"><button onclick="toggleEye()" aria-label="Show or hide amounts" style="position:absolute;top:14px;right:14px;border:0;background:rgba(255,255,255,.25);color:#fff;border-radius:99px;padding:7px 11px;font-size:15px">${hideAmts?"🙈 Show":"👁 Hide"}</button><div class="big">${gbp(total)}</div><div class="sub">known so far${tbcAll?` · ${tbcAll} still TBC`:""}</div></div>${rows}
     <p class="meta" style="text-align:center">All in GBP.</p>`;
 }
-async function unlock(e){
-  e.preventDefault(); const c = $("#code").value;
-  try{ COSTS = await decrypt(c); ls.set("famcode", c); render(); }
-  catch(err){ $("#err").textContent = "That code didn't work – try again."; }
+
+// ---------- map (Timeline → Map switch) ----------
+let view = ls.get("view") || "list";
+function setView(v){ view = v; ls.set("view", v); render(); }
+const MODE_STYLE = { road:{weight:4,opacity:.9}, fly:{weight:2,opacity:.7,dashArray:"2 8"}, ferry:{weight:3,opacity:.8,dashArray:"8 8"} };
+function stopsFor(){
+  const w = who==="all" ? "mum" : who;   // Everyone = the full route (Mum & Dad cover the whole trip)
+  const st = TRIP.items.filter(i => i.type==="stay" && i.lat!=null && i.who.includes(w)).sort((a,b) => a.date.localeCompare(b.date));
+  const out = [];
+  st.forEach(s => { const last = out[out.length-1];
+    if(last && Math.abs(last.lat-s.lat)<.01 && Math.abs(last.lng-s.lng)<.01 && last.endDate===s.date){ last.endDate = s.endDate; return; }
+    out.push({...s}); });
+  return out;
+}
+const km = (a,b) => { const R=6371, r=x=>x*Math.PI/180, dLa=r(b.lat-a.lat), dLo=r(b.lng-a.lng);
+  return 2*R*Math.asin(Math.sqrt(Math.sin(dLa/2)**2 + Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(dLo/2)**2)); };
+async function roadLine(a,b){
+  const k = `route:${a.lat},${a.lng};${b.lat},${b.lng}`;
+  const c = ls.get(k); if(c) try{ return JSON.parse(c); }catch(e){}
+  const r = await fetch(`https://router.project-osrm.org/route/v1/driving/${a.lng},${a.lat};${b.lng},${b.lat}?overview=simplified&geometries=geojson`);
+  const j = await r.json(); const pts = j.routes[0].geometry.coordinates.map(([x,y]) => [y,x]);
+  ls.set(k, JSON.stringify(pts)); return pts;
+}
+let MAP = null;
+function mapView(){
+  return `<div id="mapwrap" style="position:relative;height:calc(100vh - 265px - env(safe-area-inset-top) - env(safe-area-inset-bottom));min-height:360px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line)">
+    <div id="map" style="position:absolute;inset:0"></div>
+    <div id="mapmsg" style="display:none;position:absolute;inset:0;background:#fff;z-index:1000;place-items:center;text-align:center;padding:30px">
+      <div><div style="font-size:34px">📶</div><div class="t" style="margin:8px 0 4px">The map needs signal</div><p class="meta">Everything else works offline. Try again when you're connected.</p>
+      <button class="btn primary" onclick="setView('map')">Try again</button></div></div></div>
+    <div class="legend" style="margin-top:10px"><span>━ drive</span><span>┅ flight</span><span>╌ ferry</span><span>Tap a pin for details</span></div>`;
+}
+function noSignal(){ const m = document.getElementById("mapmsg"); if(m) m.style.display = "grid"; }
+async function drawMap(){
+  if(MAP){ MAP.remove(); MAP = null; }
+  if(!navigator.onLine || typeof L === "undefined") return noSignal();
+  const col = HERO[who] || HERO.all, stops = stopsFor();
+  if(!stops.length) return;
+  MAP = L.map("map", {zoomControl:false}); MAP.attributionControl.setPrefix(false);
+  let tileErr = 0, tileOk = 0;
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {maxZoom:18, attribution:'© OpenStreetMap © CARTO'})
+    .on("tileerror", () => { if(++tileErr > 6 && !tileOk) noSignal(); }).on("tileload", () => tileOk++).addTo(MAP);
+  const aus = stops.filter(s => s.lng > 110);
+  MAP.fitBounds(L.latLngBounds((aus.length ? aus : stops).map(s => [s.lat, s.lng])).pad(.08));
+  const groups = [];   // same place visited twice (e.g. Sydney) → one pin "2·10"
+  stops.forEach((s,n) => { const g = groups.find(g => km(g, s) < 2); if(g){ g.nums.push(n+1); g.visits.push(s); } else groups.push({lat:s.lat, lng:s.lng, nums:[n+1], visits:[s]}); });
+  groups.forEach(g => {
+    const label = g.nums.join("·"), w = 22 + label.length*6;
+    const icon = L.divIcon({className:"", iconSize:[w,28], iconAnchor:[w/2,14],
+      html:`<div style="min-width:28px;height:28px;padding:0 7px;border-radius:14px;background:${col};color:#fff;font:600 13px -apple-system,system-ui;display:grid;place-items:center;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3)">${label}</div>`});
+    L.marker([g.lat, g.lng], {icon}).addTo(MAP).bindPopup(g.visits.map((s,k) => { const nts = nights(s.date, s.endDate);
+      return `<b>${g.nums[k]}. ${esc(s.title)}</b><br>${fmtDay(s.date)} → ${fmtDay(s.endDate)} · ${nts} night${nts>1?"s":""}`; }).join("<br><br>") +
+      `<br><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(g.visits[0].place||g.visits[0].title)}">Open in Google Maps</a>`);
+  });
+  for(let n=1; n<stops.length; n++){
+    const a = stops[n-1], b = stops[n];
+    let mode = b.arrive || "fly"; if(mode==="ferry" && km(a,b) > 60) mode = "fly";
+    let pts = [[a.lat,a.lng],[b.lat,b.lng]];
+    if(mode==="road"){ try{ pts = await roadLine(a,b); }catch(e){ mode = "fly"; } }
+    if(!MAP) return;
+    L.polyline(pts, {color:col, ...MODE_STYLE[mode]}).addTo(MAP);
+  }
 }
 
 // ---------- shell ----------
@@ -303,21 +395,22 @@ async function render(){
     `<button class="chip ${who===k?"on":""}" onclick="pick('${k}')">${v}</button>`).join("");
   const tabs = TABS.filter(t => t[0] !== "costs" || COSTS || tab === "costs");
   $("#nav").innerHTML = tabs.map(([k,ic,l]) => `<button class="${tab===k?"on":""}" onclick="go('${k}')"><b>${ic}</b>${l}</button>`).join("");
+  if(MAP && !(tab==="timeline" && view==="map")){ MAP.remove(); MAP = null; }
   $("#main").innerHTML = tab==="today" ? today() : tab==="timeline" ? timeline() : tab==="todo" ? todo() : tab==="info" ? info() : await costs();
+  if(tab==="timeline" && view==="map") drawMap();
 }
-// Family unlock, two hidden ways: (1) the family link ending #fam=CODE (saved, then wiped from the address bar)
-// (2) tap the title 5 times quickly → code box. Guests never see a Costs tab.
+// Hidden sign-in: (1) link ending #me=CODE  (2) tap the title 5 times. Guests never see a sign-in or Costs tab.
 let taps = 0, tapT;
 document.querySelector("h1").addEventListener("click", () => {
   taps++; clearTimeout(tapT); tapT = setTimeout(() => taps = 0, 1500);
   if(taps >= 5){ taps = 0; go("costs"); }
 });
 (async () => {
-  const m = location.hash.match(/fam=([^&]+)/);
-  if(m){ try{ COSTS = await decrypt(decodeURIComponent(m[1])); ls.set("famcode", decodeURIComponent(m[1])); }catch(e){}
-    history.replaceState(null, "", location.pathname + location.search); }
+  const m = location.hash.match(/(?:me|fam)=([^&]+)/);
+  if(m){ await applyCode(decodeURIComponent(m[1]).toLowerCase()); history.replaceState(null, "", location.pathname + location.search); }
   const saved = ls.get("famcode");
-  if(!COSTS && saved){ try{ COSTS = await decrypt(saved); }catch(e){} }
+  if(saved){ try{ COSTS = await decrypt(saved); }catch(e){} }
+  if(me) who = me;                       // signed in → open on your own view every time
   if(tab === "costs" && !COSTS) tab = "today";
   render();
 })();
