@@ -154,7 +154,7 @@ function card(i){
         <div class="t">${esc(i.title)}</div>
         <div class="meta">${esc(timeLine(i))}</div>
         ${i.held ? `<div class="meta">📱 ${esc(i.held)}</div>` : (["booked","details"].includes(i.status) ? `<div class="meta">📱 Whose phone? – tell Ryan</div>` : "")}
-        <div>${i.approx?'<span class="tag approx">dates TBC</span>':""}<span class="tag">${esc(ppl)}</span></div>
+        <div>${i.approx?'<span class="tag approx">dates TBC</span>':""}${Object.keys(TRIP.people).filter(w => i.who.includes(w)).map(w => `<span class="tag" style="background:${TINT[w][0]};color:${TINT[w][1]}">${TRIP.people[w]}</span>`).join("")}</div>
       </div>
       <div class="st" title="${sTxt}">${sIc}</div>
     </div>
@@ -397,7 +397,8 @@ const TABS = [["today","☀️","Today"],["timeline","🗓️","Timeline"],["tod
 function go(t){ tab = t; ls.set("tab", t); render(); scrollTo(0,0); }
 function pick(w){ who = w; ls.set("who", w); render(); }
 function toggleEye(){ hideAmts = !hideAmts; ls.set("hideAmts", hideAmts ? "1" : "0"); render(); }
-const HERO = {all:"#0c447c", mum:"#3b6d11", dad:"#c2410c", ryan:"#534ab7", bobbi:"#b4376b"};
+const HERO = {all:"#0c447c", mum:"#3b6d11", dad:"#ea580c", ryan:"#534ab7", bobbi:"#db2777"};
+const TINT = {mum:["#eaf3de","#27500a"], dad:["#ffedd5","#9a3412"], ryan:["#eeedfe","#3c3489"], bobbi:["#fce7f3","#9d174d"]};
 async function render(){
   document.documentElement.style.setProperty("--hero", HERO[who] || HERO.all);
   $("#chips").innerHTML = [["all","Everyone"], ...Object.entries(TRIP.people)].map(([k,v]) =>
