@@ -20,13 +20,13 @@ h1{margin:0;font:700 21px/1.15 -apple-system,system-ui;letter-spacing:-.3px}
 h1 span{color:inherit}
 .chips{display:flex;gap:8px;margin-top:10px;overflow-x:auto;scrollbar-width:none}
 .chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 13px;font-size:14px;white-space:nowrap;color:var(--ink)}
-.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip.on{background:var(--hero,#0c447c);color:#fff;border-color:var(--hero,#0c447c)}
 main{padding:14px 14px calc(90px + env(safe-area-inset-bottom))}
 nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);z-index:5}
 nav button{flex:1;border:0;background:none;padding:9px 0 8px;font-size:11px;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:2px}
 nav button b{font-size:21px;font-weight:400;line-height:1}
 nav button.on{color:var(--ochre);font-weight:600}
-.hero{background:#0c447c;color:#fff;border-radius:var(--r);padding:20px 18px;margin-bottom:16px}
+.hero{background:var(--hero,#0c447c);color:#fff;border-radius:var(--r);padding:20px 18px;margin-bottom:16px}
 .hero .big{font:800 52px/1 -apple-system,system-ui;letter-spacing:-1.5px}
 .hero .sub{opacity:.92;margin-top:4px}
 h2{font-size:13px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin:22px 4px 8px;font-weight:600}
@@ -261,7 +261,9 @@ const TABS = [["today","☀️","Today"],["timeline","🗓️","Timeline"],["tod
 function go(t){ tab = t; ls.set("tab", t); render(); scrollTo(0,0); }
 function pick(w){ who = w; ls.set("who", w); render(); }
 function toggleEye(){ hideAmts = !hideAmts; ls.set("hideAmts", hideAmts ? "1" : "0"); render(); }
+const HERO = {all:"#0c447c", mum:"#3b6d11", dad:"#c2410c", ryan:"#534ab7", bobbi:"#b4376b"};
 async function render(){
+  document.documentElement.style.setProperty("--hero", HERO[who] || HERO.all);
   $("#chips").innerHTML = [["all","Everyone"], ...Object.entries(TRIP.people)].map(([k,v]) =>
     `<button class="chip ${who===k?"on":""}" onclick="pick('${k}')">${v}</button>`).join("");
   const tabs = TABS.filter(t => t[0] !== "costs" || COSTS || tab === "costs");
