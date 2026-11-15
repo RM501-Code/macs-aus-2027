@@ -13,13 +13,13 @@ const TRIP = {
   people: { mum: "Mum", dad: "Dad", ryan: "Ryan", bobbi: "Bobbi" },
   items: [
     // ================= MUM & DAD: SINGAPORE =================
-    { id: "p-uk-sg", held: "Dad's phone", type: "flight", who: P, status: "booked",
+    { id: "p-uk-sg", held: "Dad's Phone (Trailfinders)", type: "flight", who: P, status: "booked",
       title: "London → Singapore · Flight ?", date: "2027-02-08", tz: "+00:00",
       notes: "Flight number + times to add." },
-    { id: "p-sg-stay", held: "Dad's phone", paid: true, type: "stay", who: P, status: "booked",
+    { id: "p-sg-stay", held: "Dad's Phone (Booking.com)", paid: true, type: "stay", who: P, status: "booked",
       title: "PARKROYAL COLLECTION Marina Bay", date: "2027-02-09", endDate: "2027-02-13", tz: "+08:00",
       place: "PARKROYAL COLLECTION Marina Bay Singapore" },
-    { id: "p-sg-syd", held: "Dad's phone", type: "flight", who: P, status: "booked",
+    { id: "p-sg-syd", held: "Dad's Phone (Trailfinders)", type: "flight", who: P, status: "booked",
       title: "Singapore → Sydney · Flight ?", date: "2027-02-14", tz: "+11:00",
       notes: "Lands Sun 14 Feb. Flight number + times to add." },
 
@@ -32,7 +32,7 @@ const TRIP = {
       notes: "Queensland is 1 hour behind Sydney (no daylight saving)." },
 
     // ================= CAIRNS =================
-    { id: "cns-stay", held: "Dad's phone", paid: true, type: "stay", who: PB, status: "booked",
+    { id: "cns-stay", held: "Dad's Phone (Booking.com)", paid: true, type: "stay", who: PB, status: "booked",
       title: "Cairns Aquarius", date: "2027-02-18", endDate: "2027-02-21", tz: "+10:00",
       place: "Cairns Aquarius" },
     { id: "cns-reef", type: "activity", who: PB, status: "tobook",
@@ -50,7 +50,7 @@ const TRIP = {
       depPlace: "Cairns", depTime: "09:55", depTz: "+10:00", arrPlace: "Proserpine", arrDate: "2027-02-21", arrTime: "11:20", arrTz: "+10:00",
       notes: "Times are a guess (~09:55 → 11:20). Then taxi to Airlie Beach (~35 min).",
       lookup: [["Confirm flight days + times", "skytrans.com.au"]] },
-    { id: "airlie-stay", held: "Dad's phone", pay: "2027-02-17", cancel: "2027-02-19", type: "stay", who: PB, status: "booked",
+    { id: "airlie-stay", held: "Dad's Phone (Booking.com)", pay: "2027-02-17", cancel: "2027-02-19", type: "stay", who: PB, status: "booked",
       title: "Airlie Beach Hotel", date: "2027-02-21", endDate: "2027-02-22", tz: "+10:00",
       place: "Airlie Beach Hotel" },
 
@@ -59,13 +59,13 @@ const TRIP = {
       title: "London Heathrow → Beijing · CA938", date: "2027-02-19", tz: "+00:00",
       depPlace: "Heathrow", depTime: "20:25", depTz: "+00:00",
       arrPlace: "Beijing", arrDate: "2027-02-20", arrTime: "14:30", arrTz: "+08:00",
-      held: "Booking.com – Ryan's phone", notes: "11-hour layover in Beijing – Great Wall plan." },
+      held: "Ryan's Phone (Booking.com)", notes: "11-hour layover in Beijing – Great Wall plan." },
     { id: "r-pek-syd", type: "flight", who: ["ryan"], status: "booked",
       title: "Beijing → Sydney · CA177", date: "2027-02-21", tz: "+11:00",
       depPlace: "Beijing", depTime: "01:40", depTz: "+08:00",
       arrPlace: "Sydney", arrDate: "2027-02-21", arrTime: "15:50", arrTz: "+11:00",
-      place: "Sydney Airport", held: "Booking.com – Ryan's phone" },
-    { id: "r-syd-night", held: "Ryan's phone", paid: true, type: "stay", who: ["ryan"], status: "booked",
+      place: "Sydney Airport", held: "Ryan's Phone (Booking.com)" },
+    { id: "r-syd-night", held: "Ryan's Phone (Booking.com)", paid: true, type: "stay", who: ["ryan"], status: "booked",
       title: "Ibis Sydney Airport", date: "2027-02-21", endDate: "2027-02-22", tz: "+11:00",
       place: "Ibis Sydney Airport" },
 
@@ -74,10 +74,10 @@ const TRIP = {
       title: "Ferry: Port of Airlie → Hamilton Island", date: "2027-02-22", time: "09:00", tz: "+10:00",
       place: "Port of Airlie", notes: "Morning ferry, ~9–9:30am.",
       lookup: [["Ferry times + tickets", "Cruise Whitsundays website"]] },
-    { id: "r-syd-ham", held: "Ryan's phone", type: "flight", who: ["ryan"], status: "booked",
+    { id: "r-syd-ham", held: "Ryan's Phone (Booking.com)", type: "flight", who: ["ryan"], status: "booked",
       title: "Sydney → Hamilton Island · Flight ?", date: "2027-02-22", tz: "+10:00",
       place: "Hamilton Island Airport", notes: "Flight number + landing time to add." },
-    { id: "ham-stay", held: "Ryan's phone", pay: "2027-01-20", cancel: "2027-01-22", type: "stay", who: ALL, status: "booked",
+    { id: "ham-stay", held: "Ryan's Phone (Booking.com)", pay: "2027-01-20", cancel: "2027-01-22", type: "stay", who: ALL, status: "booked",
       title: "Frangipani Apartments", date: "2027-02-22", endDate: "2027-02-25", tz: "+10:00",
       place: "Frangipani Hamilton Island", notes: "🎉 Everyone together from here." },
     { id: "ham-hop", type: "activity", who: ALL, status: "idea",
@@ -90,7 +90,7 @@ const TRIP = {
     // ================= BRISBANE =================
     { id: "ham-bne", type: "flight", who: ALL, status: "tobook",
       title: "Hamilton Island → Brisbane", date: "2027-02-25", tz: "+10:00" },
-    { id: "bne-stay", held: "Ryan's phone", payNote: "Pay on arrival", cancel: "2027-02-23", type: "stay", who: ALL, status: "booked",
+    { id: "bne-stay", held: "Ryan's Phone (Booking.com)", payNote: "Pay on arrival", cancel: "2027-02-23", type: "stay", who: ALL, status: "booked",
       title: "Oaks Brisbane on Margaret Suites", date: "2027-02-25", endDate: "2027-02-27", tz: "+10:00",
       place: "Oaks Brisbane on Margaret Suites" },
     { id: "bne-zoo", type: "activity", who: ALL, status: "tobook",
@@ -107,7 +107,7 @@ const TRIP = {
       title: "Brisbane → Byron Bay", date: "2027-02-27", tz: "+11:00",
       hrs: "~2h", stops: ["Gold Coast – lunch"],
       notes: "⏰ Clocks jump forward 1 hour at the NSW border." },
-    { id: "byron-stay", held: "Ryan's phone", pay: "2027-02-19", cancel: "2027-02-22", type: "stay", who: ALL, status: "booked",
+    { id: "byron-stay", held: "Ryan's Phone (Booking.com)", pay: "2027-02-19", cancel: "2027-02-22", type: "stay", who: ALL, status: "booked",
       title: "Byron Quarter Apartments", date: "2027-02-27", endDate: "2027-03-01", tz: "+11:00",
       place: "Byron Quarter Apartments Byron Bay" },
     { id: "byron-day", type: "activity", who: ALL, status: "idea",
@@ -115,7 +115,7 @@ const TRIP = {
     { id: "d2", type: "drive", who: ALL, status: "idea",
       title: "Byron Bay → Port Macquarie", date: "2027-03-01", tz: "+11:00",
       hrs: "~5h", stops: ["Coffs Harbour or Yamba – lunch"] },
-    { id: "pm-stay", held: "Ryan's phone", payNote: "Pay on arrival", cancel: "2027-02-28", type: "stay", who: ALL, status: "booked",
+    { id: "pm-stay", held: "Ryan's Phone (Booking.com)", payNote: "Pay on arrival", cancel: "2027-02-28", type: "stay", who: ALL, status: "booked",
       title: "Rydges Port Macquarie", date: "2027-03-01", endDate: "2027-03-02", tz: "+11:00",
       place: "Rydges Port Macquarie" },
     { id: "pm-koala", type: "activity", who: ALL, status: "idea",
@@ -124,7 +124,7 @@ const TRIP = {
     { id: "d3", type: "drive", who: ALL, status: "idea",
       title: "Port Macquarie → Blue Mountains", date: "2027-03-02", time: "09:30", tz: "+11:00",
       hrs: "~5h30–6h", stops: ["Newcastle – lunch", "Three Sisters at sunset"] },
-    { id: "bm-stay", held: "Ryan's phone", pay: "2027-02-22", cancel: "2027-02-25", type: "stay", who: ALL, status: "booked",
+    { id: "bm-stay", held: "Ryan's Phone (Booking.com)", pay: "2027-02-22", cancel: "2027-02-25", type: "stay", who: ALL, status: "booked",
       title: "Montblu at Echo Point", date: "2027-03-02", endDate: "2027-03-03", tz: "+11:00",
       place: "Montblu Echo Point Katoomba" },
     { id: "bm-scenic", type: "activity", who: ALL, status: "idea",
@@ -147,7 +147,7 @@ const TRIP = {
       title: "Sydney → Shanghai → Gatwick · China Eastern", date: "2027-03-06", tz: "+11:00",
       depPlace: "Sydney", depTime: "21:30", depTz: "+11:00",
       arrPlace: "Gatwick", arrDate: "2027-03-07", arrTime: "14:00", arrTz: "+00:00",
-      place: "Sydney Airport", held: "Ryan's phone" },
+      place: "Sydney Airport", held: "Ryan's Phone (Booking.com)" },
 
     { id: "b-leaves", type: "flight", who: ["bobbi"], status: "details", approx: true,
       title: "Bobbi heads off", date: "2027-03-14", tz: "+11:00",
@@ -155,12 +155,12 @@ const TRIP = {
 
     // ================= MUM & DAD: HOME VIA SENTOSA =================
     { id: "p-syd-sg", type: "flight", who: P, status: "booked",
-      title: "Sydney → Singapore · Flight ?", held: "Dad's phone", date: "2027-03-08", tz: "+11:00",
+      title: "Sydney → Singapore · Flight ?", held: "Dad's Phone (Trailfinders)", date: "2027-03-08", tz: "+11:00",
       notes: "Leave Australia 8 Mar. Flight number + times to add." },
-    { id: "p-sentosa", type: "stay", who: P, status: "booked", held: "Dad's phone",
+    { id: "p-sentosa", type: "stay", who: P, status: "booked", held: "Dad's Phone (Booking.com)",
       title: "Shangri-La Rasa Sentosa", date: "2027-03-08", endDate: "2027-03-11", tz: "+08:00",
       place: "Shangri-La Rasa Sentosa Singapore", notes: "Relaxing beach finish." },
-    { id: "p-home", type: "flight", who: P, status: "booked", held: "Dad's phone",
+    { id: "p-home", type: "flight", who: P, status: "booked", held: "Dad's Phone (Trailfinders)",
       title: "Singapore → London · Flight ?", notes: "Flight number + times to add.", date: "2027-03-11", tz: "+08:00" }
   ]
 };
