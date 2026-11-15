@@ -161,7 +161,7 @@ function card(i){
       ${dl ? `<p>${dl}</p>` : (i.type==="stay" && i.status!=="idea" ? `<p class="meta">💷 Payment date / ↩️ cancellation date – not added yet</p>` : "")}
       ${i.notes ? `<p>${esc(i.notes)}</p>` : ""}
       ${(i.lookup||[]).map(([w,where]) => `<div class="look"><b>🔎 ${esc(w)}</b>Look up on: ${esc(where)}</div>`).join("")}
-      <div class="row">${maps}${dir}${cal}${dlCal}</div>
+      <div class="row">${maps}${dir}${cal}</div>
     </div>
   </div>`;
 }
