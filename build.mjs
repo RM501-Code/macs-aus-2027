@@ -38,7 +38,7 @@ writeFileSync("index.html", html);
 writeFileSync("manifest.webmanifest", JSON.stringify({
   name: "Mac's Australia Adventure 2027", short_name: "Mac's Aus 27",
   start_url: "./", scope: "./", display: "standalone",
-  background_color: "#f6f1e9", theme_color: "#f6f1e9",
+  background_color: "#ffffff", theme_color: "#ffffff",
   icons: [{ src: "icon-192.png", sizes: "192x192", type: "image/png" }, { src: "icon-512.png", sizes: "512x512", type: "image/png" }]
 }, null, 2));
 
