@@ -359,8 +359,9 @@ async function drawMap(){
   if(!stops.length) return;
   MAP = L.map("map", {zoomControl:false}); MAP.attributionControl.setPrefix(false);
   let tileErr = 0, tileOk = 0;
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {maxZoom:18, attribution:'© OpenStreetMap © CARTO'})
+  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", {maxZoom:16, attribution:"Tiles © Esri"})
     .on("tileerror", () => { if(++tileErr > 6 && !tileOk) noSignal(); }).on("tileload", () => tileOk++).addTo(MAP);
+  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}", {maxZoom:16}).addTo(MAP);
   const aus = stops.filter(s => s.lng > 110);
   MAP.fitBounds(L.latLngBounds((aus.length ? aus : stops).map(s => [s.lat, s.lng])).pad(.08));
   const groups = [];   // same place visited twice (e.g. Sydney) → one pin "2·10"

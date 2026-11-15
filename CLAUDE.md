@@ -9,7 +9,7 @@ Live: https://rm501-code.github.io/macs-aus-2027/
 - `build.mjs` – `node build.mjs ryan dad mum` → writes `index.html`, `manifest.webmanifest`, `sw.js` at the root.
   Every code listed can unlock Costs (each gets its own encrypted copy).
 - Sign-in: codes are names (ryan, dad, mum, bobbi). Signed-in people open on their own view and see their own checklist; Bobbi has no Costs.
-- Map: Timeline → List/Map switch. Leaflet in `vendor/`, CARTO tiles, road lines from the OSRM demo server (cached per phone). Stays need `lat`, `lng`, `arrive` (fly/road/ferry).
+- Map: Timeline → List/Map switch. Leaflet in `vendor/`, Esri light-grey tiles (no key needed), road lines from the OSRM demo server (cached per phone). Stays need `lat`, `lng`, `arrive` (fly/road/ferry).
 - Icons: `icon-180/192/512.png`.
 
 ## Rules
