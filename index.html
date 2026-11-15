@@ -75,160 +75,168 @@ input{font-size:17px;padding:11px 13px;border-radius:12px;border:1px solid var(-
 <script>
 // ===== Mac's Australia Adventure 2027 — trip data =====
 // Times are LOCAL to where the thing happens; tz is that place's offset from GMT in Feb/Mar 2027.
-// UK is on GMT then. Singapore +08:00 · Uluru (NT) +09:30 · Queensland +10:00 · NSW/Sydney +11:00 · Beijing/Shanghai +08:00
+// UK is on GMT then. Singapore +08:00 · Queensland +10:00 (no daylight saving) · NSW/Sydney +11:00 · Beijing/Shanghai +08:00
 // status: booked ✅ | details ❓ (booked, need details) | tobook ⚠️ | idea 💡
-// approx: true = dates are a placeholder, not confirmed
 // NOTHING SENSITIVE IN HERE — no booking refs. "held" says where the booking lives.
 
 const P = ["mum", "dad"];
-const ALL3 = ["mum", "dad", "ryan"];
+const PB = ["mum", "dad", "bobbi"];
+const ALL = ["mum", "dad", "bobbi", "ryan"];
 
 const TRIP = {
   title: "Mac's Australia Adventure 2027",
   people: { mum: "Mum", dad: "Dad", ryan: "Ryan", bobbi: "Bobbi" },
   items: [
-    // ---------- Mum & Dad: out via Singapore ----------
-    { id: "p-uk-sg", type: "flight", who: P, status: "details", approx: true,
-      title: "London → Singapore", date: "2027-02-11", tz: "+00:00",
-      notes: "Business class. Send Ryan the flight numbers + times." },
-    { id: "p-sg-stay", type: "stay", who: P, status: "tobook", approx: true,
-      title: "Mondrian Singapore Duxton", date: "2027-02-11", endDate: "2027-02-14", tz: "+08:00",
-      place: "Mondrian Singapore Duxton",
-      notes: "Front-runner: Executive King with club benefits. 3 nights." },
+    // ================= MUM & DAD: SINGAPORE =================
+    { id: "p-uk-sg", type: "flight", who: P, status: "details",
+      title: "London → Singapore", date: "2027-02-08", tz: "+00:00",
+      notes: "Booked. Need flight number, times and whose phone it's on." },
+    { id: "p-sg-stay", type: "stay", who: P, status: "booked",
+      title: "PARKROYAL COLLECTION Marina Bay", date: "2027-02-09", endDate: "2027-02-13", tz: "+08:00",
+      place: "PARKROYAL COLLECTION Marina Bay Singapore" },
     { id: "p-sg-syd", type: "flight", who: P, status: "details",
       title: "Singapore → Sydney", date: "2027-02-14", tz: "+11:00",
-      notes: "Land in Sydney 14 Feb. Need flight number + times." },
-    { id: "p-syd-1", type: "stay", who: P, status: "tobook", approx: true,
-      title: "Sydney – before Uluru", date: "2027-02-14", endDate: "2027-02-15", tz: "+11:00",
-      place: "Sydney NSW", notes: "Is there a night in Sydney before Uluru?" },
+      notes: "Lands Sun 14 Feb. Is this booked? Need flight number + times." },
 
-    // ---------- Uluru ----------
-    { id: "p-syd-uluru", type: "flight", who: P, status: "tobook", approx: true,
-      title: "Sydney → Uluru (Ayers Rock)", date: "2027-02-15", tz: "+09:30",
-      notes: "Uluru is GMT+9:30 – half an hour off Queensland." },
-    { id: "p-uluru-stay", type: "stay", who: P, status: "tobook", approx: true,
-      title: "Ayers Rock Resort", date: "2027-02-15", endDate: "2027-02-18", tz: "+09:30",
-      place: "Ayers Rock Resort Yulara NT" },
-    { id: "p-uluru-sunrise", type: "activity", who: P, status: "idea", approx: true,
-      title: "Uluru sunrise + base walk", date: "2027-02-16", tz: "+09:30",
-      place: "Uluru Sunrise Viewing Area",
-      notes: "Feb is hot – base walk closes early on very hot days.",
-      lookup: [["Park pass + hot-weather closures", "parksaustralia.gov.au/uluru"]] },
-    { id: "p-field-light", type: "activity", who: P, status: "idea", approx: true,
-      title: "Field of Light", date: "2027-02-16", tz: "+09:30",
-      place: "Field of Light Uluru",
-      lookup: [["Tickets + timings", "ayersrockresort.com.au"]] },
+    // ================= SYDNEY (Bobbi joins) =================
+    { id: "syd-1", type: "stay", who: PB, status: "tobook",
+      title: "Sydney hotel", date: "2027-02-14", endDate: "2027-02-18", tz: "+11:00",
+      place: "Sydney NSW", notes: "Bobbi joins in Sydney as Mum & Dad land." },
+    { id: "syd-cns", type: "flight", who: PB, status: "tobook",
+      title: "Sydney → Cairns", date: "2027-02-18", tz: "+10:00",
+      notes: "Queensland is 1 hour behind Sydney (no daylight saving)." },
 
-    // ---------- Cairns ----------
-    { id: "p-uluru-cns", type: "flight", who: P, status: "tobook", approx: true,
-      title: "Uluru → Cairns", date: "2027-02-18", tz: "+10:00",
-      lookup: [["Which days fly direct", "Virgin Australia / Jetstar sites"]] },
-    { id: "p-cns-stay", type: "stay", who: P, status: "details", approx: true,
-      title: "Cairns Airbnb", date: "2027-02-18", endDate: "2027-02-22", tz: "+10:00",
-      place: "Cairns QLD", held: "Airbnb – whose phone?",
-      notes: "Need: dates, address, payment date, cancellation date." },
-    { id: "p-reef", type: "activity", who: P, status: "tobook", approx: true,
-      title: "Great Barrier Reef day trip", date: "2027-02-20", tz: "+10:00",
+    // ================= CAIRNS =================
+    { id: "cns-stay", type: "stay", who: PB, status: "booked",
+      title: "Cairns Aquarius", date: "2027-02-18", endDate: "2027-02-21", tz: "+10:00",
+      place: "Cairns Aquarius" },
+    { id: "cns-reef", type: "activity", who: PB, status: "tobook",
+      title: "Great Barrier Reef + scuba", date: "2027-02-19", tz: "+10:00",
       place: "Reef Fleet Terminal Cairns",
-      lookup: [["Outer reef trips (snorkel / dive)", "Reef Fleet Terminal operators"]] },
+      lookup: [["Outer reef trips with intro/certified dives", "Reef Fleet Terminal operators"]] },
+    { id: "cns-daintree", type: "activity", who: PB, status: "tobook",
+      title: "Daintree Rainforest", date: "2027-02-20", tz: "+10:00",
+      place: "Daintree Rainforest",
+      lookup: [["Day tours from Cairns (incl. Cape Tribulation / Mossman Gorge)", "tour sites / Tripadvisor"]] },
 
-    // ---------- Ryan arrives ----------
-    { id: "r-bjs-syd", type: "flight", who: ["ryan"], status: "booked",
-      title: "Beijing → Sydney · CA177",
+    // ================= AIRLIE BEACH =================
+    { id: "cns-pro", type: "flight", who: PB, status: "tobook",
+      title: "Cairns → Proserpine (Skytrans?)", date: "2027-02-21", time: "09:55", tz: "+10:00",
+      depPlace: "Cairns", depTime: "09:55", depTz: "+10:00", arrPlace: "Proserpine", arrDate: "2027-02-21", arrTime: "11:20", arrTz: "+10:00",
+      notes: "Times are a guess (~09:55 → 11:20). Then taxi to Airlie Beach (~35 min).",
+      lookup: [["Confirm flight days + times", "skytrans.com.au"]] },
+    { id: "airlie-stay", type: "stay", who: PB, status: "booked",
+      title: "Airlie Beach Hotel", date: "2027-02-21", endDate: "2027-02-22", tz: "+10:00",
+      place: "Airlie Beach Hotel" },
+
+    // ================= RYAN ARRIVES =================
+    { id: "r-lhr-pek", type: "flight", who: ["ryan"], status: "booked",
+      title: "London Heathrow → Beijing · CA938", date: "2027-02-19", tz: "+00:00",
+      depPlace: "Heathrow", depTime: "20:25", depTz: "+00:00",
+      arrPlace: "Beijing", arrDate: "2027-02-20", arrTime: "14:30", arrTz: "+08:00",
+      held: "Booking.com – Ryan's phone", notes: "11-hour layover in Beijing – Great Wall plan." },
+    { id: "r-pek-syd", type: "flight", who: ["ryan"], status: "booked",
+      title: "Beijing → Sydney · CA177", date: "2027-02-21", tz: "+11:00",
       depPlace: "Beijing", depTime: "01:40", depTz: "+08:00",
-      date: "2027-02-21", time: "15:50", tz: "+11:00",
-      place: "Sydney Airport", held: "Booking.com – Ryan's phone",
-      notes: "Ryan's bag checked through from Heathrow." },
-    { id: "r-syd-night", type: "stay", who: ["ryan"], status: "tobook",
-      title: "Sydney – arrival night", date: "2027-02-21", endDate: "2027-02-22", tz: "+11:00",
-      place: "Sydney NSW" },
+      arrPlace: "Sydney", arrDate: "2027-02-21", arrTime: "15:50", arrTz: "+11:00",
+      place: "Sydney Airport", held: "Booking.com – Ryan's phone" },
+    { id: "r-syd-night", type: "stay", who: ["ryan"], status: "booked",
+      title: "Sydney airport hotel", date: "2027-02-21", endDate: "2027-02-22", tz: "+11:00",
+      place: "Sydney Airport", notes: "Which hotel? Tell Ryan to add the name." },
 
-    // ---------- Meet-up: Whitsundays ----------
-    { id: "r-meet", type: "flight", who: ["ryan"], status: "tobook", approx: true,
-      title: "Sydney → Whitsundays (Hamilton Island?)", date: "2027-02-22", tz: "+10:00",
-      notes: "Meet-up point TBC – Hamilton Island or Brisbane, not Cairns." },
-    { id: "p-meet", type: "flight", who: P, status: "tobook", approx: true,
-      title: "Cairns → Whitsundays", date: "2027-02-22", tz: "+10:00",
-      lookup: [["Cairns → Hamilton Island / Proserpine flights", "Qantas / Virgin"]] },
-    { id: "whit-stay", type: "stay", who: ALL3, status: "idea", approx: true,
-      title: "Whitsundays resort", date: "2027-02-22", endDate: "2027-02-24", tz: "+10:00",
-      place: "Hamilton Island QLD", notes: "Short resort stay." },
-    { id: "whit-ferry", type: "ferry", who: ALL3, status: "idea", approx: true,
-      title: "Ferry: Hamilton Island → Airlie Beach", date: "2027-02-24", tz: "+10:00",
-      place: "Port of Airlie",
-      notes: "No hire cars on Hamilton Island – the road trip starts on the mainland.",
-      lookup: [["Ferry times", "Cruise Whitsundays website"]] },
-    { id: "car-pickup", type: "car", who: ALL3, status: "tobook", approx: true,
-      title: "Hire car pick-up – Airlie Beach / Proserpine", date: "2027-02-24", tz: "+10:00",
-      place: "Proserpine Airport",
-      notes: "Ryan's the driver. Big enough for 3 + luggage.",
-      lookup: [["One-way QLD → NSW drop-off fee (can be big)", "compare on rental sites"]] },
+    // ================= HAMILTON ISLAND – everyone together =================
+    { id: "ham-ferry", type: "ferry", who: PB, status: "tobook",
+      title: "Ferry: Port of Airlie → Hamilton Island", date: "2027-02-22", time: "09:00", tz: "+10:00",
+      place: "Port of Airlie", notes: "Morning ferry, ~9–9:30am.",
+      lookup: [["Ferry times + tickets", "Cruise Whitsundays website"]] },
+    { id: "r-syd-ham", type: "flight", who: ["ryan"], status: "details",
+      title: "Sydney → Hamilton Island", date: "2027-02-22", tz: "+10:00",
+      place: "Hamilton Island Airport", notes: "Booked. Need flight number + landing time." },
+    { id: "ham-stay", type: "stay", who: ALL, status: "booked",
+      title: "Frangipani Apartments", date: "2027-02-22", endDate: "2027-02-25", tz: "+10:00",
+      place: "Frangipani Hamilton Island", notes: "🎉 Everyone together from here." },
+    { id: "ham-hop", type: "activity", who: ALL, status: "idea",
+      title: "Island hopping / Airlie", date: "2027-02-23", tz: "+10:00",
+      lookup: [["Whitehaven Beach + Hill Inlet trips", "Cruise Whitsundays / local operators"]] },
+    { id: "ham-reefworld", type: "activity", who: ALL, status: "tobook",
+      title: "Reefworld (fly or cruise)", date: "2027-02-24", tz: "+10:00",
+      lookup: [["Reefworld day trip vs scenic flight", "Cruise Whitsundays website"]] },
 
-    // ---------- Road trip south ----------
-    { id: "d1", type: "drive", who: ALL3, status: "idea", approx: true,
-      title: "Airlie Beach → Yeppoon", date: "2027-02-24", tz: "+10:00",
-      km: 480, hrs: "~5h", stops: ["Mackay – lunch"] },
-    { id: "s-yeppoon", type: "stay", who: ALL3, status: "idea", approx: true,
-      title: "Yeppoon", date: "2027-02-24", endDate: "2027-02-25", tz: "+10:00", place: "Yeppoon QLD" },
-    { id: "d2", type: "drive", who: ALL3, status: "idea", approx: true,
-      title: "Yeppoon → Agnes Water", date: "2027-02-25", tz: "+10:00",
-      km: 300, hrs: "~3h30", stops: ["Rockhampton"] },
-    { id: "s-agnes", type: "stay", who: ALL3, status: "idea", approx: true,
-      title: "Agnes Water / 1770", date: "2027-02-25", endDate: "2027-02-26", tz: "+10:00", place: "Agnes Water QLD" },
-    { id: "d3", type: "drive", who: ALL3, status: "idea", approx: true,
-      title: "Agnes Water → Rainbow Beach", date: "2027-02-26", tz: "+10:00",
-      km: 330, hrs: "~4h", stops: ["Childers", "Bundaberg Rum distillery?"] },
-    { id: "s-rainbow", type: "stay", who: ALL3, status: "idea", approx: true,
-      title: "Rainbow Beach", date: "2027-02-26", endDate: "2027-02-27", tz: "+10:00", place: "Rainbow Beach QLD" },
-    { id: "a-carlo", type: "activity", who: ALL3, status: "idea", approx: true,
-      title: "Carlo Sandblow at sunset", date: "2027-02-26", tz: "+10:00", place: "Carlo Sandblow" },
-    { id: "d4", type: "drive", who: ALL3, status: "idea", approx: true,
-      title: "Rainbow Beach → Australia Zoo → Gold Coast", date: "2027-02-27", tz: "+10:00",
-      km: 300, hrs: "~3h45 + zoo", stops: ["Australia Zoo (1h45 in)"] },
-    { id: "a-zoo", type: "activity", who: ALL3, status: "tobook", approx: true,
-      title: "Australia Zoo", date: "2027-02-27", tz: "+10:00", place: "Australia Zoo",
+    // ================= BRISBANE =================
+    { id: "ham-bne", type: "flight", who: ALL, status: "tobook",
+      title: "Hamilton Island → Brisbane", date: "2027-02-25", tz: "+10:00" },
+    { id: "bne-stay", type: "stay", who: ALL, status: "booked",
+      title: "Oaks Brisbane on Margaret Suites", date: "2027-02-25", endDate: "2027-02-27", tz: "+10:00",
+      place: "Oaks Brisbane on Margaret Suites" },
+    { id: "bne-zoo", type: "activity", who: ALL, status: "tobook",
+      title: "Australia Zoo", date: "2027-02-26", tz: "+10:00", place: "Australia Zoo",
+      notes: "~1h15 north of Brisbane – but the hire car isn't until Sat. Pick the car up Fri instead, or book a transfer?",
       lookup: [["Tickets + opening hours", "australiazoo.com.au"]] },
-    { id: "s-gc", type: "stay", who: ALL3, status: "idea", approx: true,
-      title: "Gold Coast", date: "2027-02-27", endDate: "2027-03-01", tz: "+10:00", place: "Surfers Paradise QLD" },
-    { id: "d5", type: "drive", who: ALL3, status: "idea", approx: true,
-      title: "Gold Coast → Byron Bay", date: "2027-03-01", tz: "+11:00",
-      km: 100, hrs: "~1h15",
-      notes: "⏰ Clocks jump forward 1 hour at the NSW border (QLD has no daylight saving)." },
-    { id: "s-byron", type: "stay", who: ALL3, status: "idea", approx: true,
-      title: "Byron Bay", date: "2027-03-01", endDate: "2027-03-02", tz: "+11:00", place: "Byron Bay NSW" },
-    { id: "d6", type: "drive", who: ALL3, status: "idea", approx: true,
-      title: "Byron Bay → Port Macquarie", date: "2027-03-02", tz: "+11:00",
-      km: 400, hrs: "~4h30", stops: ["Coffs Harbour"] },
-    { id: "s-portmac", type: "stay", who: ALL3, status: "idea", approx: true,
-      title: "Port Macquarie", date: "2027-03-02", endDate: "2027-03-03", tz: "+11:00", place: "Port Macquarie NSW" },
-    { id: "d7", type: "drive", who: ALL3, status: "idea", approx: true,
-      title: "Port Macquarie → Sydney", date: "2027-03-03", tz: "+11:00",
-      km: 390, hrs: "~4h30", notes: "Goal: back in Sydney by 3 March." },
-    { id: "car-drop", type: "car", who: ALL3, status: "tobook", approx: true,
-      title: "Hire car drop-off – Sydney", date: "2027-03-03", tz: "+11:00", place: "Sydney Airport" },
 
-    // ---------- Sydney finale ----------
-    { id: "syd-end", type: "stay", who: ALL3, status: "tobook", approx: true,
-      title: "Sydney", date: "2027-03-03", endDate: "2027-03-06", tz: "+11:00", place: "Sydney NSW" },
+    // ================= ROAD TRIP =================
+    { id: "car-pickup", type: "car", who: ALL, status: "tobook",
+      title: "Hire car pick-up – Brisbane", date: "2027-02-27", tz: "+10:00", place: "Brisbane CBD",
+      notes: "Ryan driving. Room for 4 + luggage.",
+      lookup: [["One-way QLD → NSW drop-off fee (can be big)", "compare on rental sites"]] },
+    { id: "d1", type: "drive", who: ALL, status: "idea",
+      title: "Brisbane → Byron Bay", date: "2027-02-27", tz: "+11:00",
+      hrs: "~2h", stops: ["Gold Coast – lunch"],
+      notes: "⏰ Clocks jump forward 1 hour at the NSW border." },
+    { id: "byron-stay", type: "stay", who: ALL, status: "booked",
+      title: "Byron Quarter Apartments", date: "2027-02-27", endDate: "2027-03-01", tz: "+11:00",
+      place: "Byron Quarter Apartments Byron Bay" },
+    { id: "byron-day", type: "activity", who: ALL, status: "idea",
+      title: "Byron Bay – free day", date: "2027-02-28", tz: "+11:00", place: "Cape Byron Lighthouse" },
+    { id: "d2", type: "drive", who: ALL, status: "idea",
+      title: "Byron Bay → Port Macquarie", date: "2027-03-01", tz: "+11:00",
+      hrs: "~5h", stops: ["Coffs Harbour or Yamba – lunch"] },
+    { id: "pm-stay", type: "stay", who: ALL, status: "booked",
+      title: "Rydges Port Macquarie", date: "2027-03-01", endDate: "2027-03-02", tz: "+11:00",
+      place: "Rydges Port Macquarie" },
+    { id: "pm-koala", type: "activity", who: ALL, status: "idea",
+      title: "Koala Hospital", date: "2027-03-02", time: "08:30", tz: "+11:00",
+      place: "Koala Hospital Port Macquarie" },
+    { id: "d3", type: "drive", who: ALL, status: "idea",
+      title: "Port Macquarie → Blue Mountains", date: "2027-03-02", time: "09:30", tz: "+11:00",
+      hrs: "~5h30–6h", stops: ["Newcastle – lunch", "Three Sisters at sunset"] },
+    { id: "bm-stay", type: "stay", who: ALL, status: "booked",
+      title: "Montblu at Echo Point", date: "2027-03-02", endDate: "2027-03-03", tz: "+11:00",
+      place: "Montblu Echo Point Katoomba" },
+    { id: "bm-scenic", type: "activity", who: ALL, status: "idea",
+      title: "Scenic World + Leura", date: "2027-03-03", tz: "+11:00", place: "Scenic World Katoomba",
+      lookup: [["Tickets + opening times", "scenicworld.com.au"]] },
+    { id: "d4", type: "drive", who: ALL, status: "idea",
+      title: "Blue Mountains → Sydney", date: "2027-03-03", tz: "+11:00",
+      hrs: "~1h30–2h", notes: "Drop the car off in Sydney." },
+    { id: "car-drop", type: "car", who: ALL, status: "tobook",
+      title: "Hire car drop-off – Sydney", date: "2027-03-03", tz: "+11:00", place: "Sydney NSW" },
+
+    // ================= SYDNEY FINALE =================
+    { id: "syd-end-r", type: "stay", who: ["ryan"], status: "tobook",
+      title: "Sydney hotel", date: "2027-03-03", endDate: "2027-03-06", tz: "+11:00",
+      place: "Sydney NSW", notes: "Same hotel as Mum & Dad?" },
+    { id: "syd-end-p", type: "stay", who: PB, status: "tobook",
+      title: "Sydney hotel", date: "2027-03-03", endDate: "2027-03-08", tz: "+11:00",
+      place: "Sydney NSW", notes: "When does Bobbi head off?" },
     { id: "r-home", type: "flight", who: ["ryan"], status: "booked",
-      title: "Sydney → Shanghai → Gatwick · China Eastern",
+      title: "Sydney → Shanghai → Gatwick · China Eastern", date: "2027-03-06", tz: "+11:00",
       depPlace: "Sydney", depTime: "21:30", depTz: "+11:00",
-      date: "2027-03-06", time: "21:30", tz: "+11:00",
       arrPlace: "Gatwick", arrDate: "2027-03-07", arrTime: "14:00", arrTz: "+00:00",
       place: "Sydney Airport", held: "Ryan's phone" },
 
-    // ---------- Mum & Dad: home via Sentosa ----------
-    { id: "p-syd-sg", type: "flight", who: P, status: "details", approx: true,
-      title: "Sydney → Singapore", date: "2027-03-06", tz: "+11:00" },
+    // ================= MUM & DAD: HOME VIA SENTOSA =================
+    { id: "p-syd-sg", type: "flight", who: P, status: "details",
+      title: "Sydney → Singapore", date: "2027-03-08", tz: "+11:00",
+      notes: "Leave Australia 8 Mar. Need flight details." },
     { id: "p-sentosa", type: "stay", who: P, status: "tobook", approx: true,
-      title: "Shangri-La Rasa Sentosa", date: "2027-03-06", endDate: "2027-03-09", tz: "+08:00",
-      place: "Shangri-La Rasa Sentosa Singapore", notes: "Relaxing beach finish." },
+      title: "Shangri-La Rasa Sentosa", date: "2027-03-08", endDate: "2027-03-11", tz: "+08:00",
+      place: "Shangri-La Rasa Sentosa Singapore", notes: "Dates TBC." },
     { id: "p-home", type: "flight", who: P, status: "details", approx: true,
-      title: "Singapore → London", date: "2027-03-09", tz: "+08:00" }
+      title: "Singapore → London", date: "2027-03-11", tz: "+08:00" }
   ]
 };
 
-const COSTS_BLOB = {"salt":"kGmtqoyTCCdD4TgMWDhrQw==","iv":"VeruMTUEy6QKPyvP","iter":150000,"data":"6jWALsX5ZURR2+Bc0H0fX6OzBuqgJ18rdFjRUCAe7iObzdfh79W+Zc99sHOBKyD6NXOgdrl2kCPy2Cm/YfZnK+Z5H7h8fvR8/oKIRPwSsPqXnDjmbBKKybocUC8JWos0MVHIfCRpPJ+i4y2En8ZRVFLtn3dOphLRtdAU9mjalNTaGRFbEYkUs6dG+M1Dtaj0a772hQ8EUfLDaAPv9jeQuMBkvkO+BQW3BciGLrycJoaxU2ooVj98R9H0T8h1fupmMcXV6u4taY8faIBuL99arh9tu8rITgEwqWXIyeCnSbXiY89ux443j51vBARx5oreiEU0PESQet7gJhDH1b9fzNha9AyzD856UfModEYZy5U6GPvKA6ymbhMmtDj/IdURLxSWzf7ZyN5hDwMYW+Vs+irJ5emxXJcPHevOjw148qlzzJMUV6lISK1MOaZ2X6OiaGjinBP4Acic1zIDtYkOZMieKToXTeY2i0stjHrezKygBq/5/hbWb2wLoqJSoGVjWEwWOPkzvY0GHJIosldHJkqJVpDx1nQ8TKyFk8w9l4zI9cFfmzI+lH5260HRULJcSI5pFRAZFBh+69gd8366iNBrgpZtdvsXSmUzLiNmGMY="};
+const COSTS_BLOB = {"salt":"6+KqKqysO9fsqaBh4Xdmgw==","iv":"d5kjnPzT1QbJyoqP","iter":150000,"data":"5DE0Dmqh5+PlUxdVn4lQji04wTBMYr9JlzzkAazK5eh6+y/pUjBigxgX/EqDn24IYkvNS8s0l3Yq6q3YGfA1YjwDQ8MrOULeaJldKTj9NufPNKfQxizxRJGPUxj4gFf8voXXTLCWj7LlreGd+LzJUNFbztIkvRSBe58yXEMcb6evqToJ/yrcscQefyQodp4JJJ4+XXPPhjxcy1kkY2+/xKrap0xUdb+APzCeXq8Xfp0gbp02xqO6FP0DF48lVK4NEFGqupNrW3ZxwN0k0LrygRi+KxOuqLjy/+XDVs5fjZIuHhoXN4BtnXMyP8LYkYt9Q+g3RUHsEIemmpP4+NUNHKj8QIVon8yo916nCFNwObJ4MyUhqpm6mCkLBwYNnZX7FRq19Ds0W+lC9sQnjL7EyliuFq1StlIh8xdlTsTIRUCWj0HqrX4zTlfciH5OMFN3eIOVir7AK823iB9M2SLjotTpPwHXjYAPGSPdLq62dDftrjGTi8nUpUHaFY2dPJsdfWqIdDZXdCEgC3oTf42YB8/KLN6AnMod0+XVILTRfhl1qo1aZK8k+USWeCX1WunT/jqd132pbjKqvIPZTEl7cJRqbAp/M7sQXWl9RjyiAvDsGmOvYVbyCaGnJ8Nd+WqdK6+mXMHvcN4FjRwlKkLgA1MdQsqPxk0U02wn0U8CAYSWj79Mi61U5SZjcWC0hZIO/SSghJiaC9xqx6HgI/bJe4nwavb+eTb2qoD6Yti7DoaMivDlfEhvuAJUgPSDsoqr9/GMFv3SaYCuAAuUV69OpubkhAUwH5tn5pwrwhTKqKyzlWxNg/LAxAw4APEjFIJU4Yj2w9rIGHsY/0fhB9ysA94jYag9aWyx7vbqpi32fEqUB/n2+c1JWt4w1jyQOeWrMUWV4opkFCyaEOKndSe7SIkxl64F9PWSPuhODgaPxf/nHf1auYvSegoC0Myn2m2GJy8THvjj/yYUNiulm/J5FwVSLvhQ5er0/XA1BGV46xzzcUHSzeU7LD5q60ZmYx4TiFs2B3imwwY1ZRtIt+2agK/BzR2bcLaWtn+oW60lDqWPv8OStV6VI6chSW0ZhG1od9dCg7UAgATcy/hEMI8viI1CZZdnJJOgMqnsOQd/KOmFcDfh+cfeDoNkctZZe8BH5Z4lhwcUhehHk4Ni+XYkIbSNHU8VS9idzYwLIFx0KiJq0I8U15fHBwKpy6sBzeMsWQ=="};
 </script>
 <script>
 const ICON = {flight:"✈️",stay:"🛏️",drive:"🚗",car:"🔑",activity:"🎟️",ferry:"⛴️"};
@@ -247,7 +255,8 @@ const nights = (a,b) => Math.round((new Date(b) - new Date(a))/864e5);
 const lt = (t,tz) => `${t} local (${gmt(tz)})`;
 
 const items = () => TRIP.items.filter(i => who === "all" || i.who.includes(who))
-  .sort((a,b) => (a.date+(a.time||a.depTime||"00:00")).localeCompare(b.date+(b.time||b.depTime||"00:00")));
+  .sort((a,b) => sk(a).localeCompare(sk(b)));
+const sk = i => i.date + (i.depTime || i.time || (i.type==="stay" ? "23:00" : i.type==="car" ? "08:00" : "12:00"));
 
 // ---------- calendar (.ics) ----------
 const icsDT = d => d.toISOString().replace(/[-:]/g,"").replace(/\.\d+/,"");
@@ -303,7 +312,7 @@ function card(i){
       <div class="body">
         <div class="t">${esc(i.title)}</div>
         <div class="meta">${esc(timeLine(i))}</div>
-        ${i.held ? `<div class="meta">📱 ${esc(i.held)}</div>` : ""}
+        ${i.held ? `<div class="meta">📱 ${esc(i.held)}</div>` : (["booked","details"].includes(i.status) ? `<div class="meta">📱 Whose phone? – tell Ryan</div>` : "")}
         <div>${i.approx?'<span class="tag approx">dates TBC</span>':""}<span class="tag">${esc(ppl)}</span></div>
       </div>
       <div class="st" title="${sTxt}">${sIc}</div>

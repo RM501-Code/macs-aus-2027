@@ -93,7 +93,8 @@ const nights = (a,b) => Math.round((new Date(b) - new Date(a))/864e5);
 const lt = (t,tz) => `${t} local (${gmt(tz)})`;
 
 const items = () => TRIP.items.filter(i => who === "all" || i.who.includes(who))
-  .sort((a,b) => (a.date+(a.time||a.depTime||"00:00")).localeCompare(b.date+(b.time||b.depTime||"00:00")));
+  .sort((a,b) => sk(a).localeCompare(sk(b)));
+const sk = i => i.date + (i.depTime || i.time || (i.type==="stay" ? "23:00" : i.type==="car" ? "08:00" : "12:00"));
 
 // ---------- calendar (.ics) ----------
 const icsDT = d => d.toISOString().replace(/[-:]/g,"").replace(/\.\d+/,"");
@@ -149,7 +150,7 @@ function card(i){
       <div class="body">
         <div class="t">${esc(i.title)}</div>
         <div class="meta">${esc(timeLine(i))}</div>
-        ${i.held ? `<div class="meta">📱 ${esc(i.held)}</div>` : ""}
+        ${i.held ? `<div class="meta">📱 ${esc(i.held)}</div>` : (["booked","details"].includes(i.status) ? `<div class="meta">📱 Whose phone? – tell Ryan</div>` : "")}
         <div>${i.approx?'<span class="tag approx">dates TBC</span>':""}<span class="tag">${esc(ppl)}</span></div>
       </div>
       <div class="st" title="${sTxt}">${sIc}</div>
