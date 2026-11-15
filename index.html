@@ -229,7 +229,7 @@ const TRIP = {
   ]
 };
 
-const COSTS_BLOB = {"salt":"Crv+kqFKv+MLS24dwxIlYA==","iv":"hhQUlqU+muzYDza2","iter":150000,"data":"Q0/XYuSNrir/5pRh2nm2eo5+zMWibnSE7owHR7Fnym/R/ag+4lnf0xHKJ8sLH7l9w/+kMn68TZaTxkeQPnrGlwKO1ajqjvFrluZOPZR5l0KXW3vJkhloxw/KdZwNFP2TuFk2wGDpOWqEO38qE/YgOh0xwDBYbQ7c3hGZB1ochzqYdAzyqkSXAd7C1O+V6xEFGpEaS5t0FOTDoy8RC8Hf4HWu77kgpQxSyGaaQYdvErcC+gWDlqUA6dn1x+S7gHZdogr9V6i+qe6NCmwi/ELPQ1hdvQe+aaQb/SRDB1Jcf4pbzUWTrDUIVRyWdbL2noS8T/2fqgYsudCwoL22uyt1zweX98k6OJFMt1aVvkYu34vJSCL0ogDHTDv7GqW+fQvOHfcurygRajPkYJfRH+6X+csdiUqdlu1bU9BYCWa1x5Dx3an8Tlep7SL11EYBMvwckMlQVf+EM6EfQwpcBGoWGiLypfXXy8LCc/aRSH07f9MgyMdNej5Rv/jk8GyxiiOngDWAl4kUc/xpME7mE4P8cJpbFm4MnXgQ1D+DB+nAjMMjKFIP2lq3QVpwbVVWjV8iIa8Pvfo1fWUVBISWqPzMQq+Y+M7HKaBySxxoWufmdpA="};
+const COSTS_BLOB = {"salt":"F/2Lk1tAnXQFCt+Gcbj03w==","iv":"vnUp1iqovHUZ9iRJ","iter":150000,"data":"hrzNm/VZCHipisW+PdEcB2Q7CBjx6AX9KBySEwnIpb/RfOvlSueDIzwYC/ZM3ZQDTPoT6i7zk79nIPcRiqzltyt1fTnLSt9lejwGCKTJj5fcuMDG0i73jpsqQfkRVgzgCZdSZM29pcvXbTNQwywDJdDIvgyr2n56UXnpRbSDkDywGc2NZpdQK0KgB5MSOkR8iiByRYGSTp1e9eeb9sai1VtulN2p1iVv/ASGTQFemv6bgplSguHvaIcjTDQQRiULi+bXuVjbEjHsl0MOUuHg64yIec/AeTjwka8dZJbW7lITkHAVdP0gssKGflgENHGN75QeuwnVy73f59zTfjKYVGfFBUG1s87x2L69Sq0bjAcfXs4owlaOD/j2qzcvP2GCyoO75un4JLi1XMkrywdEQTSe6oTVk8K8Z3tTD4pp+tgAmBvCy6hKbMTLA8qifUizysP350uSFRfMcXfi+XN1EmvIYure6zVPZ09qmGTMzgUm3yOs23JPYZvi642p/nKeva5uoPEZFPAsCGMstvIIUPvblCbpVEgWDplxlssrvPfrh2os//4UcRrRmReQ/tMrtj//U8NyNNIPW03gF/M3V/cvBZeMzTnA0THoP7pRTnI="};
 </script>
 <script>
 const ICON = {flight:"✈️",stay:"🛏️",drive:"🚗",car:"🔑",activity:"🎟️",ferry:"⛴️"};
@@ -396,8 +396,8 @@ async function costs(){
   const rows = Object.entries(COSTS).map(([cat, lines]) => {
     const sum = lines.reduce((s,l) => s + (l.gbp||0), 0), tbc = lines.filter(l => l.gbp==null).length;
     total += sum; tbcAll += tbc;
-    return `<div class="card" onclick="this.classList.toggle('open')"><div class="cost-head"><span>${cat}</span><span class="amt">${gbp(sum)}</span></div>
-      <div class="meta">${lines.length} item${lines.length!==1?"s":""}${tbc?` · ${tbc} TBC`:""} · tap for breakdown</div>
+    return `<div class="card" onclick="this.classList.toggle('open')"><div class="cost-head"><span>${cat}</span><span class="amt">${!lines.length ? "–" : (sum===0 && tbc ? "TBC" : gbp(sum))}</span></div>
+      <div class="meta">${!lines.length ? "Nothing yet" : `${lines.length} item${lines.length!==1?"s":""}${tbc?` · ${tbc} TBC`:""} · tap for breakdown`}</div>
       <div class="cost-lines">${lines.map(l => `<div><span>${esc(l.label)}</span><span>${l.gbp==null?"TBC":gbp(l.gbp)}</span></div>`).join("") || "<div><span class='meta'>Nothing yet</span></div>"}</div></div>`;
   }).join("");
   return `<div class="hero" style="position:relative"><button onclick="toggleEye()" aria-label="Show or hide amounts" style="position:absolute;top:14px;right:14px;border:0;background:rgba(255,255,255,.25);color:#fff;border-radius:99px;padding:7px 11px;font-size:15px">${hideAmts?"🙈 Show":"👁 Hide"}</button><div class="big">${gbp(total)}</div><div class="sub">known so far${tbcAll?` · ${tbcAll} still TBC`:""}</div></div>${rows}
