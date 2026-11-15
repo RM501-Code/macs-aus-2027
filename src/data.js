@@ -157,7 +157,7 @@ const TRIP = {
     { id: "p-syd-sg", type: "flight", who: P, status: "booked",
       title: "Sydney → Singapore · Flight ?", held: "Dad's phone", date: "2027-03-08", tz: "+11:00",
       notes: "Leave Australia 8 Mar. Flight number + times to add." },
-    { id: "p-sentosa", type: "stay", who: P, status: "booked",
+    { id: "p-sentosa", type: "stay", who: P, status: "booked", held: "Dad's phone",
       title: "Shangri-La Rasa Sentosa", date: "2027-03-08", endDate: "2027-03-11", tz: "+08:00",
       place: "Shangri-La Rasa Sentosa Singapore", notes: "Relaxing beach finish." },
     { id: "p-home", type: "flight", who: P, status: "booked", held: "Dad's phone",
