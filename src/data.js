@@ -164,3 +164,26 @@ const TRIP = {
       title: "Singapore → London · Flight ?", notes: "Flight number + times to add.", date: "2027-03-11", tz: "+08:00" }
   ]
 };
+
+// ===== Pre-trip checklist (Info tab) =====
+// done: list of people who've ticked it off. Ryan updates this.
+const CHECKLIST = [
+  { task: "Australia eVisitor visa (subclass 651)", who: ["mum", "dad", "ryan"], done: [],
+    how: "Free. Apply on the official site only (ImmiAccount) – ignore paid look-alike sites. Apply a few weeks before.",
+    link: "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/evisitor-651" },
+  { task: "Passport valid 6+ months after return", who: ["mum", "dad", "ryan"], done: [],
+    how: "Check expiry dates now – renewals take weeks." },
+  { task: "Singapore Arrival Card", who: ["mum", "dad"], done: [],
+    how: "Free, online, within 3 days before arriving. Twice: before 9 Feb and before 8 Mar.",
+    link: "https://www.ica.gov.sg/enter-transit-depart/entering-singapore/sg-arrival-card" },
+  { task: "Travel insurance (incl. scuba + car hire excess)", who: ["mum", "dad", "ryan"], done: [],
+    how: "Check scuba diving is covered, and consider car hire excess cover for the road trip." },
+  { task: "Driving licence (photocard) for the hire car", who: ["ryan"], done: [],
+    how: "UK photocard licence is fine for visitors. Add any extra drivers when booking the car." },
+  { task: "eSIM / roaming sorted", who: ["mum", "dad", "ryan"], done: [],
+    how: "Australia + Singapore (and China for Ryan's layover)." },
+  { task: "Dive cards + medical form", who: ["dad"], done: [],
+    how: "Bring certification cards for the reef dive on 19 Feb." },
+  { task: "Beijing layover prep", who: ["ryan"], done: [],
+    how: "Alipay linked to UK card (Didi inside Alipay), eSIM, Great Wall tickets from late Jan." }
+];
