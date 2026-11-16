@@ -226,10 +226,18 @@ function timelineList(){
   return h + `<p class="meta" style="text-align:center;margin-top:20px">Tap any card for details, map + calendar.<br>All times are local, with the offset from UK time.</p>`;
 }
 
+let todoView = ls.get("todoView") || "travel";
+function setTodo(v){ todoView = v; ls.set("todoView", v); render(); }
+const TRAVEL = ["flight","stay","car","ferry"];
 function todo(){
-  const list = items();
+  const all = items().filter(i => i.status !== "booked" && i.type !== "drive" && i.id !== "car-drop");   // drives + car drop-off aren't separate bookings
+  const isT = i => TRAVEL.includes(i.type);
+  const nT = all.filter(isT).length, nA = all.filter(i => !isT(i)).length;
+  const sw = `<div style="display:flex;background:var(--soft);border-radius:10px;padding:3px;margin-bottom:4px">${[["travel",`✈️ Flights & stays · ${nT}`],["acts",`🎟️ Activities · ${nA}`]].map(([k,l]) =>
+    `<button onclick="setTodo('${k}')" style="flex:1;border:0;border-radius:8px;padding:8px;font-size:14px;${todoView===k?"background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1);font-weight:600":"background:none;color:var(--muted)"}">${l}</button>`).join("")}</div>`;
+  const list = all.filter(i => todoView==="travel" ? isT(i) : !isT(i));
   const g = (s, t) => { const x = list.filter(i => i.status===s); return x.length ? `<h2>${t} · ${x.length}</h2>` + x.map(card).join("") : ""; };
-  return g("details","❓ Booked – Ryan needs details") + g("tobook","⚠️ Still to book") + g("idea","💡 Ideas") || `<div class="empty">All sorted 🎉</div>`;
+  return sw + (g("tobook","⚠️ Still to book") + g("details","❓ Booked – Ryan needs details") + g("idea","💡 Ideas") || `<div class="empty">All sorted 🎉</div>`);
 }
 
 
