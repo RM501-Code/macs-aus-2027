@@ -153,10 +153,6 @@ const TRIP = {
       arrPlace: "Gatwick", arrDate: "2027-03-07", arrTime: "14:00", arrTz: "+00:00",
       place: "Sydney Airport", held: "Ryan's Phone (Booking.com)" },
 
-    { id: "b-leaves", type: "flight", who: ["bobbi"], status: "details", approx: true,
-      title: "Bobbi heads off", date: "2027-03-14", tz: "+11:00",
-      notes: "Assumed 14 March – confirm date + details." },
-
     // ================= MUM & DAD: HOME VIA SENTOSA =================
     { id: "p-syd-sg", type: "flight", who: P, status: "booked",
       title: "Sydney → Singapore · Flight ?", held: "Dad's Phone (Trailfinders)", date: "2027-03-08", tz: "+11:00",
