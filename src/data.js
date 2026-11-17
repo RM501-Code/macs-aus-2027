@@ -25,7 +25,7 @@ const TRIP = {
 
     // ================= SYDNEY (Bobbi joins) =================
     { id: "syd-1", lat: -33.8688, lng: 151.2093, arrive: "fly", type: "stay", who: PB, status: "tobook",
-      title: "Sydney hotel", date: "2027-02-14", endDate: "2027-02-18", tz: "+11:00",
+      title: "Sydney Apartment", date: "2027-02-14", endDate: "2027-02-18", tz: "+11:00",
       place: "Sydney NSW", notes: "Bobbi joins in Sydney as Mum & Dad land." },
     { id: "syd-cns", type: "flight", who: PB, status: "tobook",
       title: "Sydney → Cairns", date: "2027-02-18", tz: "+10:00",
@@ -144,9 +144,9 @@ const TRIP = {
       title: "Hire car drop-off – Sydney Airport", date: "2027-03-03", time: "20:00", tz: "+11:00",
       place: "338 King Street, Mascot NSW 2020", held: "Ryan's Phone (Stressfreecarrental.com)",
       notes: "Return full of fuel." },
-    { id: "syd-end-p", lat: -33.8688, lng: 151.2093, arrive: "road", type: "stay", who: PB, status: "tobook",
-      title: "Sydney hotel", date: "2027-03-03", endDate: "2027-03-08", tz: "+11:00",
-      place: "Sydney NSW" },
+    { id: "syd-end-p", lat: -33.8688, lng: 151.2093, arrive: "road", type: "stay", who: ALL, status: "tobook",
+      title: "Sydney Apartment", date: "2027-03-03", endDate: "2027-03-08", tz: "+11:00",
+      place: "Sydney NSW", notes: "Ryan leaves on Sat 6 Mar." },
     { id: "r-home", type: "flight", who: ["ryan"], status: "booked",
       title: "Sydney → Shanghai → Gatwick · China Eastern", date: "2027-03-06", tz: "+11:00",
       depPlace: "Sydney", depTime: "21:30", depTz: "+11:00",
