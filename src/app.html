@@ -206,6 +206,7 @@ function today(){
     <div class="card" onclick="go('todo')"><div class="n">${c("details")}</div><div class="l">❓ need details</div></div>
     <div class="card" onclick="go('todo')"><div class="n">${c("tobook")}</div><div class="l">⚠️ to book</div></div>
     <div class="card" onclick="go('todo')"><div class="n">${c("idea")}</div><div class="l">💡 ideas</div></div></div>`;
+  if(me) h += `<p class="meta" style="text-align:center;margin-top:24px">Signed in as <b>${TRIP.people[me]}</b> · <a href="#" onclick="signout();return false">Sign out</a></p>`;
   return h;
 }
 
@@ -404,7 +405,7 @@ async function drawMap(){
 }
 
 // ---------- shell ----------
-const TABS = [["today","☀️","Today"],["timeline","🗓️","Timeline"],["todo","✅","To-do"],["info","ℹ️","Info"],["costs","💷","Costs"]];
+const TABS = [["today","☀️","Today"],["timeline","🗓️","Timeline"],["todo","✅","To-do"],["costs","💷","Costs"]];
 function go(t){ tab = t; ls.set("tab", t); render(); scrollTo(0,0); }
 function pick(w){ who = w; ls.set("who", w); render(); }
 function toggleEye(){ hideAmts = !hideAmts; ls.set("hideAmts", hideAmts ? "1" : "0"); render(); }
@@ -432,7 +433,7 @@ document.querySelector("h1").addEventListener("click", () => {
   const saved = ls.get("famcode");
   if(saved){ try{ COSTS = await decrypt(saved); }catch(e){} }
   if(me) who = me;                       // signed in → open on your own view every time
-  if(tab === "costs" && !COSTS) tab = "today";
+  if((tab === "costs" && !COSTS) || tab === "info") tab = "today";
   render();
 })();
 if("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(()=>{});
