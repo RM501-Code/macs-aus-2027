@@ -317,12 +317,15 @@ async function costs(){
   if(!COSTS) return signinView();
   const gbp = n => hideAmts ? "£ ••••" : "£" + n.toLocaleString("en-GB");
   let total = 0, tbcAll = 0;
+  // each cost line links to a timeline item ("item": id) → sorted by when it happens, new lines slot in automatically
+  const when = l => (TRIP.items.find(i => i.id===l.item) || {}).date || l.date || "9999";
   const rows = Object.entries(COSTS).map(([cat, lines]) => {
+    lines = [...lines].sort((a,b) => when(a).localeCompare(when(b)));
     const sum = lines.reduce((s,l) => s + (l.gbp||0), 0), tbc = lines.filter(l => l.gbp==null).length;
     total += sum; tbcAll += tbc;
     return `<div class="card" onclick="this.classList.toggle('open')"><div class="cost-head"><span>${cat}</span><span class="amt">${!lines.length ? "–" : (sum===0 && tbc ? "TBC" : gbp(sum))}</span></div>
       <div class="meta">${!lines.length ? "Nothing yet" : `${lines.length} item${lines.length!==1?"s":""}${tbc?` · ${tbc} TBC`:""} · tap for breakdown`}</div>
-      <div class="cost-lines">${lines.map(l => `<div><span>${esc(l.label)}</span><span>${l.gbp==null?"TBC":gbp(l.gbp)}</span></div>`).join("") || "<div><span class='meta'>Nothing yet</span></div>"}</div></div>`;
+      <div class="cost-lines">${lines.map(l => `<div><span><span class="meta" style="display:inline-block;min-width:52px">${when(l)==="9999"?"":fmtDay(when(l)).replace(/^\w+ /,"")}</span>${esc(l.label)}</span><span>${l.gbp==null?"TBC":gbp(l.gbp)}</span></div>`).join("") || "<div><span class='meta'>Nothing yet</span></div>"}</div></div>`;
   }).join("");
   return `<div class="hero" style="position:relative"><button onclick="toggleEye()" aria-label="Show or hide amounts" style="position:absolute;top:14px;right:14px;border:0;background:rgba(255,255,255,.25);color:#fff;border-radius:99px;padding:7px 11px;font-size:15px">${hideAmts?"🙈 Show":"👁 Hide"}</button><div class="big">${gbp(total)}</div><div class="sub">known so far${tbcAll?` · ${tbcAll} still TBC`:""}</div></div>${rows}
     <p class="meta" style="text-align:center">All in GBP.</p>`;
