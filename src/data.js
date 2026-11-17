@@ -88,8 +88,12 @@ const TRIP = {
       lookup: [["Reefworld day trip vs scenic flight", "Cruise Whitsundays website"]] },
 
     // ================= BRISBANE =================
-    { id: "ham-bne", type: "flight", who: ALL, status: "tobook",
-      title: "Hamilton Island → Brisbane", date: "2027-02-25", tz: "+10:00" },
+    { id: "ham-bne", type: "flight", who: ALL, status: "booked",
+      title: "Hamilton Island → Brisbane · QF1593", date: "2027-02-25", tz: "+10:00",
+      depPlace: "Hamilton Island", depTime: "15:00", depTz: "+10:00",
+      arrPlace: "Brisbane", arrDate: "2027-02-25", arrTime: "16:40", arrTz: "+10:00",
+      place: "Hamilton Island Airport", held: "Ryan's Phone (Booking.com)",
+      notes: "Qantas (QantasLink). Seats 16C–16F together. 1h40." },
     { id: "bne-stay", lat: -27.473, lng: 153.027, arrive: "fly", held: "Ryan's Phone (Booking.com)", payNote: "Pay on arrival", cancel: "2027-02-23", type: "stay", who: ALL, status: "booked",
       title: "Oaks Brisbane on Margaret Suites", date: "2027-02-25", endDate: "2027-02-27", tz: "+10:00",
       place: "Oaks Brisbane on Margaret Suites" },
@@ -101,7 +105,7 @@ const TRIP = {
     // ================= ROAD TRIP =================
     { id: "car-pickup", type: "car", who: ALL, status: "tobook",
       title: "Hire car pick-up – Brisbane Airport", date: "2027-02-25", tz: "+10:00", place: "Brisbane Airport",
-      notes: "Pick up on arrival from Hamilton (time TBC). One-way to Sydney, drop off 3 Mar. Ryan driving – room for 4 + luggage.",
+      notes: "Pick up after landing at 16:40. One-way to Sydney, drop off 3 Mar. Ryan driving – room for 4 + luggage.",
       lookup: [["One-way QLD → NSW drop-off fee (can be big)", "compare on rental sites"], ["Parking at Oaks on Margaret (city centre)", "hotel website"]] },
     { id: "d1", type: "drive", who: ALL, status: "idea",
       title: "Brisbane → Byron Bay", date: "2027-02-27", tz: "+11:00",
