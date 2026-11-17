@@ -160,7 +160,9 @@ const TRIP = {
       title: "Shangri-La Rasa Sentosa", date: "2027-03-08", endDate: "2027-03-11", tz: "+08:00",
       place: "Shangri-La Rasa Sentosa Singapore", notes: "Relaxing beach finish." },
     { id: "p-home", type: "flight", who: P, status: "booked", held: "Dad's Phone (Trailfinders)",
-      title: "Singapore → London · Flight ?", notes: "Flight number + times to add.", date: "2027-03-11", tz: "+08:00" }
+      title: "Singapore → London · Flight ?", date: "2027-03-11", tz: "+08:00",
+      depPlace: "Singapore", depTime: "23:00", depTz: "+08:00",
+      place: "Singapore Changi Airport", notes: "Overnight flight. Flight number + landing time to add." }
   ]
 };
 
