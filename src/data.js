@@ -20,8 +20,10 @@ const TRIP = {
       title: "PARKROYAL COLLECTION Marina Bay", date: "2027-02-09", endDate: "2027-02-13", tz: "+08:00",
       place: "PARKROYAL COLLECTION Marina Bay Singapore" },
     { id: "p-sg-syd", held: "Dad's Phone (Trailfinders)", type: "flight", who: P, status: "booked",
-      title: "Singapore → Sydney · Flight ?", date: "2027-02-14", tz: "+11:00",
-      notes: "Lands Sun 14 Feb. Flight number + times to add." },
+      title: "Singapore → Sydney · Flight ?", date: "2027-02-13", tz: "+08:00",
+      depPlace: "Singapore", depTime: "20:30", depTz: "+08:00",
+      arrPlace: "Sydney", arrDate: "2027-02-14", arrTime: "07:00", arrTz: "+11:00",
+      place: "Sydney Airport", notes: "Overnight flight. Flight number to add." },
 
     // ================= SYDNEY (Bobbi joins) =================
     { id: "syd-1", lat: -33.8688, lng: 151.2093, arrive: "fly", type: "stay", who: PB, status: "tobook",
