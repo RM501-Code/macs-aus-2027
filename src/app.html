@@ -405,7 +405,7 @@ const TABS = [["today","☀️","Today"],["timeline","🗓️","Timeline"],["tod
 function go(t){ tab = t; ls.set("tab", t); render(); scrollTo(0,0); }
 function pick(w){ who = w; ls.set("who", w); render(); }
 function toggleEye(){ hideAmts = !hideAmts; ls.set("hideAmts", hideAmts ? "1" : "0"); render(); }
-const HERO = {all:"#0c447c", mum:"#3b6d11", dad:"#ea580c", ryan:"#534ab7", bobbi:"#db2777"};
+const HERO = {all:"#1565c0", mum:"#3b6d11", dad:"#ea580c", ryan:"#534ab7", bobbi:"#db2777"};
 const TINT = {mum:["#eaf3de","#27500a"], dad:["#ffedd5","#9a3412"], ryan:["#eeedfe","#3c3489"], bobbi:["#fce7f3","#9d174d"]};
 async function render(){
   document.documentElement.style.setProperty("--hero", HERO[who] || HERO.all);
