@@ -17,4 +17,4 @@ Live: https://rm501-code.github.io/macs-aus-2027/
 - Costs are encrypted inside `index.html` with each cost code. `src/costs.json` is gitignored;
   if it's missing, `build.mjs` recovers it by decrypting the existing blob – uses the first code given (e.g. ryan).
   Delete `src/costs.json` again after building.
-- All costs in GBP. Each cost line has "item": <timeline id> so the Costs tab sorts by date – always set it on new lines. Statuses: booked ✅ / details ❓ / tobook ⚠️ / idea 💡.
+- All costs in GBP. Each cost line has "item": <timeline id> so the Costs tab sorts by date – always set it on new lines. Statuses: booked ✅ / details ❓ / tobook ⚠️ / idea 💡 / free (free time, no icon, not in To-do). Activities get their own `icon` emoji.

@@ -79,8 +79,8 @@ input{font-size:17px;padding:11px 13px;border-radius:12px;border:1px solid var(-
 const COSTS_BLOB = /*COSTS*/;
 </script>
 <script>
-const ICON = {flight:"✈️",stay:"🛏️",drive:"🚗",car:"🔑",activity:"🎟️",ferry:"⛴️"};
-const STATUS = {booked:["✅","Booked"],details:["❓","Booked – details needed"],tobook:["⚠️","Still to book"],idea:["💡","Idea"]};
+const ICON = {flight:"✈️",stay:"🛏️",drive:"🚗",car:"🔑",activity:"⭐",ferry:"⛴️"};
+const STATUS = {booked:["✅","Booked"],details:["❓","Booked – details needed"],tobook:["⚠️","Still to book"],idea:["💡","Idea"],free:["","Free time"]};
 const ls = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
 let who = ls.get("who") || "all";
 let tab = ls.get("tab") || "today";
@@ -149,7 +149,7 @@ function card(i){
                  i.amend && `<a class="btn" href="${ics("✏️ Last day for free changes: "+i.title,{allDay:true,start:i.amend,end:addDay(i.amend)})}" download="amend-${i.id}.ics">📅 Change date</a>`].filter(Boolean).join("");
   return `<div class="card item-wrap" onclick="this.classList.toggle('open')">
     <div class="item">
-      <div class="ic ${i.type}">${ICON[i.type]}</div>
+      <div class="ic ${i.type}">${i.icon || ICON[i.type]}</div>
       <div class="body">
         <div class="t">${esc(i.title)}</div>
         <div class="meta">${esc(timeLine(i))}</div>
@@ -159,7 +159,7 @@ function card(i){
       <div class="st" title="${sTxt}">${sIc}</div>
     </div>
     <div class="more" onclick="event.stopPropagation()">
-      <p><b>${sIc} ${sTxt}</b></p>
+      ${sTxt && i.status!=="free" ? `<p><b>${sIc} ${sTxt}</b></p>` : ""}
       ${dl ? `<p>${dl}</p>` : (i.type==="stay" && i.status!=="idea" ? `<p class="meta">💷 Payment date / ↩️ cancellation date – not added yet</p>` : "")}
       ${i.notes ? `<p>${esc(i.notes)}</p>` : ""}
       ${(i.lookup||[]).map(([w,where]) => `<div class="look"><b>🔎 ${esc(w)}</b>Look up on: ${esc(where)}</div>`).join("")}
@@ -231,7 +231,7 @@ let todoView = ls.get("todoView") || "travel";
 function setTodo(v){ todoView = v; ls.set("todoView", v); render(); }
 const TRAVEL = ["flight","stay","car","ferry"];
 function todo(){
-  const all = items().filter(i => i.status !== "booked" && i.type !== "drive" && i.id !== "car-drop");   // drives + car drop-off aren't separate bookings
+  const all = items().filter(i => i.status !== "booked" && i.status !== "free" && i.type !== "drive" && i.id !== "car-drop");   // drives + car drop-off aren't separate bookings
   const isT = i => TRAVEL.includes(i.type);
   const nT = all.filter(isT).length, nA = all.filter(i => !isT(i)).length;
   const sw = `<div style="display:flex;background:var(--soft);border-radius:10px;padding:3px;margin-bottom:4px">${[["travel",`✈️ Flights & stays · ${nT}`],["acts",`🎟️ Activities · ${nA}`]].map(([k,l]) =>
