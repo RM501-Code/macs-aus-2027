@@ -84,8 +84,8 @@ const TRIP = {
       title: "Island hopping / Airlie", date: "2027-02-23", tz: "+10:00",
       lookup: [["Whitehaven Beach + Hill Inlet trips", "Cruise Whitsundays / local operators"]] },
     { id: "ham-reefworld", type: "activity", who: ALL, status: "tobook",
-      title: "Reefworld (fly or cruise)", date: "2027-02-24", tz: "+10:00",
-      lookup: [["Reefworld day trip vs scenic flight", "Cruise Whitsundays website"]] },
+      title: "Activities on Hamilton Island", date: "2027-02-24", tz: "+10:00",
+      lookup: [["Options incl. Reefworld, Whitehaven Beach, scenic flights", "Hamilton Island / Cruise Whitsundays websites"]] },
 
     // ================= BRISBANE =================
     { id: "ham-bne", type: "flight", who: ALL, status: "booked",
@@ -125,7 +125,7 @@ const TRIP = {
     { id: "pm-stay", lat: -31.43, lng: 152.91, arrive: "road", held: "Ryan's Phone (Booking.com)", payNote: "Pay on arrival", cancel: "2027-02-28", type: "stay", who: ALL, status: "booked",
       title: "Rydges Port Macquarie", date: "2027-03-01", endDate: "2027-03-02", tz: "+11:00",
       place: "Rydges Port Macquarie" },
-    { id: "pm-koala", type: "activity", who: ALL, status: "idea",
+    { id: "pm-koala", type: "activity", who: ALL, status: "tobook",
       title: "Koala Hospital", date: "2027-03-02", time: "08:30", tz: "+11:00",
       place: "Koala Hospital Port Macquarie" },
     { id: "d3", type: "drive", who: ALL, status: "idea",
