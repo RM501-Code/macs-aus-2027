@@ -14,16 +14,16 @@ const TRIP = {
   items: [
     // ================= MUM & DAD: SINGAPORE =================
     { id: "p-uk-sg", held: "Dad's Phone (Trailfinders)", type: "flight", who: P, status: "booked",
-      title: "London → Singapore · Flight ?", date: "2027-02-08", tz: "+00:00",
-      notes: "Flight number + times to add." },
+      title: "London → Singapore · BA001", date: "2027-02-08", tz: "+00:00",
+      notes: "Times to add." },
     { id: "p-sg-stay", lat: 1.2915, lng: 103.8576, arrive: "fly", held: "Dad's Phone (Trailfinders)", paid: true, type: "stay", who: P, status: "booked",
       title: "PARKROYAL COLLECTION Marina Bay", date: "2027-02-09", endDate: "2027-02-13", tz: "+08:00",
       place: "PARKROYAL COLLECTION Marina Bay Singapore" },
     { id: "p-sg-syd", held: "Dad's Phone (Trailfinders)", type: "flight", who: P, status: "booked",
-      title: "Singapore → Sydney · Flight ?", date: "2027-02-13", tz: "+08:00",
+      title: "Singapore → Sydney · BA015", date: "2027-02-13", tz: "+08:00",
       depPlace: "Singapore", depTime: "20:30", depTz: "+08:00",
       arrPlace: "Sydney", arrDate: "2027-02-14", arrTime: "07:00", arrTz: "+11:00",
-      place: "Sydney Airport", notes: "Overnight flight. Flight number to add." },
+      place: "Sydney Airport", notes: "Overnight flight." },
 
     // ================= SYDNEY (Bobbi joins) =================
     { id: "syd-1", lat: -33.8688, lng: 151.2093, arrive: "fly", type: "stay", who: PB, status: "tobook",
@@ -167,15 +167,15 @@ const TRIP = {
 
     // ================= MUM & DAD: HOME VIA SENTOSA =================
     { id: "p-syd-sg", type: "flight", who: P, status: "booked",
-      title: "Sydney → Singapore · Flight ?", held: "Dad's Phone (Trailfinders)", date: "2027-03-08", tz: "+11:00",
-      notes: "Leave Australia 8 Mar. Flight number + times to add." },
+      title: "Sydney → Singapore · BA016", held: "Dad's Phone (Trailfinders)", date: "2027-03-08", tz: "+11:00",
+      notes: "Leave Australia 8 Mar. Times to add." },
     { id: "p-sentosa", lat: 1.253, lng: 103.81, arrive: "fly", type: "stay", who: P, status: "booked", held: "Dad's Phone (Trailfinders)",
       title: "Shangri-La Rasa Sentosa", date: "2027-03-08", endDate: "2027-03-11", tz: "+08:00",
       place: "Shangri-La Rasa Sentosa Singapore", notes: "Relaxing beach finish." },
     { id: "p-home", type: "flight", who: P, status: "booked", held: "Dad's Phone (Trailfinders)",
-      title: "Singapore → London · Flight ?", date: "2027-03-11", tz: "+08:00",
+      title: "Singapore → London · BA016", date: "2027-03-11", tz: "+08:00",
       depPlace: "Singapore", depTime: "23:00", depTz: "+08:00",
-      place: "Singapore Changi Airport", notes: "Overnight flight. Flight number + landing time to add." }
+      place: "Singapore Changi Airport", notes: "Overnight flight. Landing time to add." }
   ]
 };
 
