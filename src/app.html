@@ -141,7 +141,7 @@ function timeLine(i){
 function card(i){
   const [sIc, sTxt] = STATUS[i.status];
   const maps = i.place ? `<a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(i.place)}">📍 Map</a>` : "";
-  const dir = i.type==="drive" ? `<a class="btn" target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(i.title.split(" → ")[0]+", Australia")}&destination=${encodeURIComponent(i.title.split(" → ").pop()+", Australia")}&travelmode=driving">🧭 Route</a>` : "";
+  const dir = i.type==="drive" ? `<a class="btn" target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent((i.from||i.title.split(" → ")[0])+", Australia")}&destination=${encodeURIComponent((i.to||i.title.split(" → ").pop())+", Australia")}&travelmode=driving">🧭 Route</a>` : "";
   const cal = `<a class="btn" href="${calLink(i)}" download="${i.id}.ics">📅 Add to Calendar</a>`;
   const ppl = i.who.map(w => TRIP.people[w]).join(", ");
   const dl = [i.paid && `💷 <b>Paid</b>`, i.payNote && `💷 ${esc(i.payNote)}`, i.pay && `💷 Pay by <b>${fmtDay(i.pay)}</b>`, i.cancel && `↩️ Free cancel until <b>${fmtDay(i.cancel)}</b>`, i.amend && `✏️ Free changes until <b>${fmtDay(i.amend)}</b>`].filter(Boolean).join("<br>");
@@ -162,7 +162,7 @@ function card(i){
     <div class="more" onclick="event.stopPropagation()">
       ${sTxt && i.status!=="free" ? `<p><b>${sIc} ${sTxt}</b></p>` : ""}
       ${dl ? `<p>${dl}</p>` : (i.type==="stay" && i.status!=="idea" ? `<p class="meta">💷 Payment date / ↩️ cancellation date – not added yet</p>` : "")}
-      ${i.notes ? `<p>${esc(i.notes)}</p>` : ""}
+      ${i.notes ? `<p>${esc(i.notes).replace(/\n/g,"<br>")}</p>` : ""}
       ${(i.lookup||[]).map(([w,where]) => `<div class="look"><b>🔎 ${esc(w)}</b>Look up on: ${esc(where)}</div>`).join("")}
       <div class="row">${maps}${dir}${cal}</div>
     </div>
