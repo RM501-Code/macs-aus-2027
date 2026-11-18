@@ -123,7 +123,7 @@ function calLink(i){
     let start = s; if(e < start){ start = at(prevDay(i.date), i.depTime, i.depTz); }
     return ics(name, {start, end:e, loc:i.place, desc});
   }
-  if(i.time) { const s = at(i.date,i.time,i.tz); return ics(name,{start:s,end:new Date(+s+36e5),loc:i.place,desc}); }
+  if(i.time) { const s = at(i.date,i.time,i.tz); return ics(name,{start:s,end:i.endTime ? at(i.date,i.endTime,i.tz) : new Date(+s+36e5),loc:i.place,desc}); }
   return ics(name, {allDay:true, start:i.date, end:addDay(i.date), loc:i.place, desc});
 }
 const prevDay = d => { const x = new Date(d+"T12:00:00Z"); x.setUTCDate(x.getUTCDate()-1); return x.toISOString().slice(0,10); };
@@ -134,6 +134,7 @@ function timeLine(i){
   if(i.type === "flight" && i.depTime) return i.time ? `Departs ${i.depPlace} ${lt(i.depTime,i.depTz)} → lands ${lt(i.time,i.tz)}` : `Departs ${i.depPlace} ${lt(i.depTime,i.depTz)} · landing time TBC`;
   if(i.type === "stay") return `${fmtDay(i.date)} → ${fmtDay(i.endDate)} · ${nights(i.date,i.endDate)} night${nights(i.date,i.endDate)>1?"s":""}${i.checkIn?` · in ${i.checkIn} / out ${i.checkOut} (${gmt(i.tz)})`:""}`;
   if(i.type === "drive") return `${i.km ? i.km+" km · " : ""}${i.hrs||""}${i.stops?.length ? " · via "+i.stops.join(", ") : ""}`;
+  if(i.time && i.endTime) return `${i.time} → ${i.endTime} local (${gmt(i.tz)})`;
   if(i.time) return lt(i.time, i.tz);
   return "Time TBC";
 }
