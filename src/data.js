@@ -53,11 +53,11 @@ const TRIP = {
       title: "Free day in Cairns", date: "2027-02-20", tz: "+10:00", place: "Cairns Esplanade Lagoon" },
 
     // ================= AIRLIE BEACH =================
-    { id: "cns-pro", type: "flight", who: PB, status: "tobook",
-      title: "Cairns → Proserpine (Skytrans?)", date: "2027-02-21", time: "09:55", tz: "+10:00",
+    { id: "cns-pro", type: "flight", who: PB, status: "booked",
+      title: "Cairns → Proserpine · Skytrans", date: "2027-02-21", tz: "+10:00",
       depPlace: "Cairns", depTime: "09:55", depTz: "+10:00", arrPlace: "Proserpine", arrDate: "2027-02-21", arrTime: "11:20", arrTz: "+10:00",
-      notes: "Times are a guess (~09:55 → 11:20). Then taxi to Airlie Beach (~35 min).",
-      lookup: [["Confirm flight days + times", "skytrans.com.au"]] },
+      place: "Cairns Airport", held: "Ryan's Phone (Booking.com)",
+      notes: "Skytrans (QN) FlexFlight, direct, 1h25. Cabin bag + checked bag included. Then taxi to Airlie Beach (~35 min)." },
     { id: "airlie-stay", lat: -20.2683, lng: 148.718, arrive: "fly", held: "Dad's Phone (Booking.com)", pay: "2027-02-17", cancel: "2027-02-19", type: "stay", who: PB, status: "booked",
       title: "Airlie Beach Hotel", date: "2027-02-21", endDate: "2027-02-22", tz: "+10:00",
       place: "Airlie Beach Hotel" },
