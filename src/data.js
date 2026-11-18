@@ -83,10 +83,10 @@ const TRIP = {
       place: "Ibis Sydney Airport" },
 
     // ================= HAMILTON ISLAND – everyone together =================
-    { id: "ham-ferry", type: "ferry", who: PB, status: "tobook",
+    { id: "ham-ferry", type: "ferry", who: PB, status: "booked",
       title: "Ferry: Port of Airlie → Hamilton Island", date: "2027-02-22", time: "09:00", tz: "+10:00",
-      place: "Port of Airlie", notes: "Morning ferry, ~9–9:30am.",
-      lookup: [["Ferry times + tickets", "Cruise Whitsundays website"]] },
+      place: "Port of Airlie", held: "Dad's Phone (PDF / email)",
+      notes: "Morning ferry, ~9–9:30am – exact time on the ticket." },
     { id: "r-syd-ham", held: "Ryan's Phone (Booking.com)", type: "flight", who: ["ryan"], status: "booked",
       title: "Sydney → Hamilton Island · QF578", date: "2027-02-22", tz: "+10:00",
       depPlace: "Sydney", depTime: "09:40", depTz: "+11:00",
