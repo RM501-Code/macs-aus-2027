@@ -29,9 +29,12 @@ const TRIP = {
     { id: "syd-1", lat: -33.8688, lng: 151.2093, arrive: "fly", type: "stay", who: PB, status: "tobook",
       title: "Sydney Apartment", date: "2027-02-14", endDate: "2027-02-18", tz: "+11:00",
       place: "Sydney NSW", notes: "Bobbi joins in Sydney as Mum & Dad land." },
-    { id: "syd-cns", type: "flight", who: PB, status: "tobook",
-      title: "Sydney → Cairns", date: "2027-02-18", tz: "+10:00",
-      notes: "Queensland is 1 hour behind Sydney (no daylight saving)." },
+    { id: "syd-cns", type: "flight", who: PB, status: "booked",
+      title: "Sydney → Cairns · JQ952", date: "2027-02-18", tz: "+10:00",
+      depPlace: "Sydney", depTime: "11:25", depTz: "+11:00",
+      arrPlace: "Cairns", arrDate: "2027-02-18", arrTime: "13:30", arrTz: "+10:00",
+      place: "Sydney Airport", held: "Ryan's Phone (Booking.com)",
+      notes: "Jetstar, direct, 3h05. Queensland is 1 hour behind Sydney." },
 
     // ================= CAIRNS =================
     { id: "cns-stay", lat: -16.919, lng: 145.778, arrive: "fly", held: "Dad's Phone (Booking.com)", paid: true, type: "stay", who: PB, status: "booked",
