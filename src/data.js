@@ -26,9 +26,11 @@ const TRIP = {
       place: "Sydney Airport", notes: "Overnight flight." },
 
     // ================= SYDNEY (Bobbi joins) =================
-    { id: "syd-1", lat: -33.8688, lng: 151.2093, arrive: "fly", type: "stay", who: PB, status: "tobook",
+    { id: "syd-1", lat: -33.8745, lng: 151.2065, arrive: "fly", type: "stay", who: PB, status: "booked",
       title: "Sydney Apartment", date: "2027-02-14", endDate: "2027-02-18", tz: "+11:00",
-      place: "Sydney NSW", notes: "Bobbi joins in Sydney as Mum & Dad land." },
+      checkIn: "15:00", checkOut: "10:00", cancel: "2027-01-15",
+      place: "60 Bathurst Street, Sydney NSW 2000",
+      notes: "Airbnb, CBD near Darling Harbour. Free cancellation until 3pm on 15 Jan; partial refund until 3pm on 7 Feb.\nBobbi joins in Sydney as Mum & Dad land (07:00) – check-in isn't until 3pm, so ask the host about early bag drop." },
     { id: "syd-cns", type: "flight", who: PB, status: "booked",
       title: "Sydney → Cairns · JQ952", date: "2027-02-18", tz: "+10:00",
       depPlace: "Sydney", depTime: "11:25", depTz: "+11:00",
